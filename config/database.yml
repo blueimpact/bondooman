@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV['DB_POOL'] || ENV['MAX_THREADS'] || 5 %>
+  username: bondooman
+  password:
+
+development:
+  <<: *default
+  database: bondooman_development
+
+test:
+  <<: *default
+  database: bondooman_test
+
+production:
+  <<: *default
+  database: bondooman_production
+  username: bondooman
+  password: <%= ENV['BONDOOMAN_DATABASE_PASSWORD'] %>
