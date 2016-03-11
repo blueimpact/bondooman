@@ -19,5 +19,4 @@ Rails.application.configure do
   config.assets.digest = true
 
   config.assets.raise_runtime_errors = true
-
 end

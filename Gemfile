@@ -29,6 +29,7 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'tapp'
   gem 'quiet_assets'
+  gem 'rubocop', require: false
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
 
@@ -39,6 +40,7 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'guard-rspec'
   gem 'guard-livereload', require: false
+  gem 'guard-rubocop'
 end
 
 group :development do

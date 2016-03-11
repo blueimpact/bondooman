@@ -4,8 +4,8 @@ FactoryGirl.define do
     genre nil
     segment nil
     rank 1
-    title "MyString"
-    author "MyString"
+    title 'MyString'
+    author 'MyString'
     price 1
     rating 1
     rating_count 1
