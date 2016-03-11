@@ -1,0 +1,10 @@
+- if @genres.present?
+  = paginate @genres
+  table.table.table-bordered.table-condensed.table-hover
+    caption= render 'layouts/paginate_info', items: @genres
+    = render @genres
+- else
+  .alert
+    p.text-muted=t 'messages.no_item', item: Genre.model_name.human
+
+= link_to t('helpers.links.new'), [:new, :genre], :class => 'btn btn-success'

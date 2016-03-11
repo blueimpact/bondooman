@@ -1,0 +1,10 @@
+- if @segments.present?
+  = paginate @segments
+  table.table.table-bordered.table-condensed.table-hover
+    caption= render 'layouts/paginate_info', items: @segments
+    = render @segments
+- else
+  .alert
+    p.text-muted=t 'messages.no_item', item: Segment.model_name.human
+
+= link_to t('helpers.links.new'), [:new, :segment], :class => 'btn btn-success'

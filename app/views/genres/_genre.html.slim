@@ -1,0 +1,8 @@
+tr id=dom_id(genre)
+  td= genre.label
+  td= genre.name
+  td
+    a.btn.btn-default.btn-xs href=url_for(genre)
+      i.fa.fa-list
+    a.btn.btn-default.btn-xs href=url_for([:edit, genre])
+      i.fa.fa-pencil

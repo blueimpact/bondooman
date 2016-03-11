@@ -21,28 +21,20 @@ html lang="ja"
     .navbar.navbar-default.navbar-static-top
       .container
         button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.navbar-brand href=root_path Bondooman
+          i.fa.fa-bars.fa-lg.text-primary
+        a.navbar-brand href=root_path =t 'header.site_title'
         .navbar-collapse.collapse.navbar-responsive-collapse
           ul.nav.navbar-nav
-            li= link_to "Link 1", "/path1"
-            li= link_to "Link 2", "/path2"
-            li= link_to "Link 3", "/path3"
+            - [Genre, Segment].each do |model_class|
+              - name = model_class.model_name
+              - active = controller_name == name.plural ? 'active' : ''
+              li class=active = link_to name.human, [name.plural]
     .container
       .row
-        .col-lg-9
+        .col-lg-12
+          = render 'layouts/messages'
           = yield
-        .col-lg-3
-          .well.sidebar-nav
-            h3 Sidebar
-            ul.nav.nav-list
-              li.nav-header Sidebar
-              li= link_to "Link 1", "/path1"
-              li= link_to "Link 2", "/path2"
-              li= link_to "Link 3", "/path3"
     hr
     footer
       .container
-        p &copy; Company 2016
+        p.text-right Copyright (C) 2016 Bondooman

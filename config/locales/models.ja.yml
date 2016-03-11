@@ -1,0 +1,21 @@
+ja:
+  activerecord:
+    models:
+      genre: ジャンル
+      segment: 区分
+      item: アイテム
+      shot: テーマ
+    attributes:
+      timestamps: &timestamps
+        created_at: 作成日時
+        updated_at: 更新日時
+      genre:
+        id: ID
+        name: 名前
+        label: ラベル
+        <<: *timestamps
+      segment:
+        id: ID
+        name: 名前
+        label: ラベル
+        <<: *timestamps

@@ -1,0 +1,11 @@
+.form.form-horizontal
+  .form-group
+    label.control-label.col-md-2= Genre.human_attribute_name(:label)
+    p.form-control-static.col-md-6= @genre.label
+  .form-group
+    label.control-label.col-md-2= Genre.human_attribute_name(:name)
+    p.form-control-static.col-md-6= @genre.name
+  .form-group
+    .col-md-offset-2.col-md-6
+      = link_to t('helpers.links.edit'), [:edit, @genre], :class => 'btn btn-default'
+      = link_to t('helpers.links.cancel'), [:genres], class: 'btn btn-default'

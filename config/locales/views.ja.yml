@@ -1,6 +1,11 @@
 ja:
   header:
-    site_title: Bondooman
+    site_title: ボンドメン
+  nav:
+    home: ホーム
+    login: ログイン
+    logout: ログアウト
+    item_list: '%{item}一覧'
   helpers:
     links:
       new: 新規登録
@@ -9,5 +14,13 @@ ja:
       destroy: 削除
       back: 戻る
       cancel: キャンセル
+      sync: 同期
     submit:
       confirm: 確認
+  messages:
+    login_please: ログインしてください。
+    successed_to_login: ログインしました。
+    failed_to_login: ログインできませんでした。
+    successed_to_logout: ログアウトしました。
+    permission_denied: 権限がありません。
+    no_item: '%{item}はありません。'
