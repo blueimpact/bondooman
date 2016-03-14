@@ -14,6 +14,8 @@ gem 'slim-rails'
 gem 'kaminari'
 gem 'settingslogic'
 
+gem 'mechanize'
+
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'compass-rails'

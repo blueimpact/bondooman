@@ -1,4 +1,4 @@
-# inherit_from: .rubocop_todo.yml
+inherit_from: .rubocop_todo.yml
 
 AllCops:
   RunRailsCops: true
@@ -34,7 +34,6 @@ Style/BracesAroundHashParameters:
 Style/ClassAndModuleChildren:
   Enabled: false
 
-# Offense count: 102
 Style/Documentation:
   Enabled: false
 

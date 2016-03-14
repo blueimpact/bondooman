@@ -11,6 +11,8 @@ module Bondooman
     config.i18n.default_locale = :ja
     config.i18n.available_locales = [:ja]
 
+    config.autoload_paths.unshift Rails.root.join('lib')
+
     config.generators do |g|
       g.orm :active_record
       g.test_framework :rspec, fixture: true, fixture_replacement: :factory_girl
