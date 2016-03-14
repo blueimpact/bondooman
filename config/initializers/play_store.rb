@@ -3,7 +3,7 @@ PlayStore.configure do |config|
   config.lang = 'ja_jp'
 
   config.item_count_max = 20
-  config.review_count_max = 0
+  config.review_count_max = 10
 
   config.access_interval = 6
   config.access_interval_proc = -> {

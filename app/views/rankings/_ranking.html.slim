@@ -1,0 +1,7 @@
+tr id=dom_id(ranking)
+  td=t ranking.platform, scope: 'platforms'
+  td= ranking.genre
+  td= ranking.segment
+  td
+    a.btn.btn-default.btn-xs href=url_for(ranking)
+      i.fa.fa-list

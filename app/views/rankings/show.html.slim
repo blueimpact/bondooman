@@ -1,0 +1,27 @@
+ul.nav.nav-pills
+  li
+    a=t @ranking.platform, scope: 'platforms'
+  li
+    a= @ranking.genre
+  li
+    a= @ranking.segment
+
+hr
+table.table.table-bordered.table-condensed.table-hover
+  caption= render 'layouts/paginate_info', items: @ranking.shots.page
+  - @ranking.shots.each do |shot|
+    tr
+      td= shot.rank
+      td
+        a href=shot.url target="_blank"
+          img src=shot.image_url height="50px"
+      td= shot.title
+      td= shot.author
+      td.text-right= number_to_currency shot.price
+      td.text-right= '%.1f' % shot.rating
+      td.text-right= number_with_delimiter shot.rating_count
+      td.text-right
+        - if shot.download_count
+          span= number_with_delimiter shot.download_count_min
+          span 〜
+          span= number_with_delimiter shot.download_count_max

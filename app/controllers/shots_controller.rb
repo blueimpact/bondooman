@@ -3,7 +3,7 @@ class ShotsController < ApplicationController
 
   # GET /shots
   def index
-    @shots = Shot.all
+    @shots = Shot.page(params[:page])
   end
 
   # GET /shots/1

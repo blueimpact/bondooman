@@ -3,8 +3,9 @@ ja:
     models:
       genre: ジャンル
       segment: 区分
+      ranking: ランキング
       item: アイテム
-      shot: テーマ
+      shot: ショット
     attributes:
       timestamps: &timestamps
         created_at: 作成日時
@@ -18,4 +19,10 @@ ja:
         id: ID
         name: 名前
         label: ラベル
+        <<: *timestamps
+      ranking:
+        id: ID
+        platform: プラットフォーム
+        genre: ジャンル
+        segment: 区分
         <<: *timestamps

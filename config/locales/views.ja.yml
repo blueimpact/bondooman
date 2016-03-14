@@ -24,3 +24,6 @@ ja:
     successed_to_logout: ログアウトしました。
     permission_denied: 権限がありません。
     no_item: '%{item}はありません。'
+  platforms:
+    googleplay: GooglePlay
+    appstore: AppStore

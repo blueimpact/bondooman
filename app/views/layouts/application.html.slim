@@ -25,7 +25,7 @@ html lang="ja"
         a.navbar-brand href=root_path =t 'header.site_title'
         .navbar-collapse.collapse.navbar-responsive-collapse
           ul.nav.navbar-nav
-            - [Genre, Segment].each do |model_class|
+            - [Ranking, Genre, Segment].each do |model_class|
               - name = model_class.model_name
               - active = controller_name == name.plural ? 'active' : ''
               li class=active = link_to name.human, [name.plural]

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309021203) do
+ActiveRecord::Schema.define(version: 20160314132911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(version: 20160309021203) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "rankings", force: :cascade do |t|
+    t.string   "platform"
+    t.integer  "genre_id"
+    t.integer  "segment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "rankings", ["genre_id"], name: "index_rankings_on_genre_id", using: :btree
+  add_index "rankings", ["segment_id"], name: "index_rankings_on_segment_id", using: :btree
 
   create_table "segments", force: :cascade do |t|
     t.string   "label"
@@ -53,13 +64,18 @@ ActiveRecord::Schema.define(version: 20160309021203) do
     t.integer  "download_count_max"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "ranking_id"
   end
 
   add_index "shots", ["genre_id"], name: "index_shots_on_genre_id", using: :btree
   add_index "shots", ["item_id"], name: "index_shots_on_item_id", using: :btree
+  add_index "shots", ["ranking_id"], name: "index_shots_on_ranking_id", using: :btree
   add_index "shots", ["segment_id"], name: "index_shots_on_segment_id", using: :btree
 
+  add_foreign_key "rankings", "genres"
+  add_foreign_key "rankings", "segments"
   add_foreign_key "shots", "genres"
   add_foreign_key "shots", "items"
+  add_foreign_key "shots", "rankings"
   add_foreign_key "shots", "segments"
 end
