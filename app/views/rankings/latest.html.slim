@@ -7,6 +7,9 @@
             span=t ranking.platform, scope: 'platforms'
             span<= ranking.genre
             span<= ranking.segment
+            small.pull-right.text-muted
+              i.fa.fa-clock-o>
+              =l ranking.created_at.to_date
           ul.list-group.media-list
             - ranking.shots.each do |shot|
               li.list-group-item
@@ -19,7 +22,7 @@
                     | .
                     span.text-large<= shot.title
                   .clearfix
-                    small.pull-left.text-muted.= shot.author
+                    small.pull-left.text-muted= shot.author
                     .pull-right= number_to_currency shot.price
                   .clearfix
                     .pull-left

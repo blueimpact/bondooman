@@ -2,7 +2,7 @@ h2
   span=t @ranking.platform, scope: 'platforms'
   span<= @ranking.genre
   span<= @ranking.segment
-  small.pull-right
+  small.pull-right.text-muted
     i.fa.fa-clock-o>
     =l @ranking.created_at.to_date
 
@@ -22,6 +22,6 @@ table.table.table-bordered.table-condensed.table-hover
       td.text-right= number_with_delimiter shot.rating_count
       td.text-right
         - if shot.download_count
-          span= number_with_delimiter shot.download_count_min
+          span= number_with_delimiter shot.download_count_min.to_i
           span 〜
-          span= number_with_delimiter shot.download_count_max
+          span= number_with_delimiter shot.download_count_max.to_i
