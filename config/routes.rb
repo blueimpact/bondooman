@@ -11,4 +11,9 @@ Rails.application.routes.draw do
   resources :segments
   resources :items, only: [:index, :show]
   resources :shots, only: [:index, :show]
+
+  unless Rails.env.test?
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

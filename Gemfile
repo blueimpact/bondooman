@@ -16,6 +16,10 @@ gem 'settingslogic'
 
 gem 'mechanize'
 
+gem 'sidekiq'
+gem 'sidekiq-limit_fetch'
+gem 'sinatra', require: false
+
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'compass-rails'

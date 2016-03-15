@@ -6,12 +6,14 @@ Bundler.require(*Rails.groups)
 
 module Bondooman
   class Application < Rails::Application
-    config.active_record.default_timezone = :local
     config.time_zone = 'Tokyo'
     config.i18n.default_locale = :ja
     config.i18n.available_locales = [:ja]
+    config.active_job.queue_adapter = :sidekiq
+    config.active_record.default_timezone = :local
+    config.active_record.raise_in_transactional_callbacks = true
 
-    config.autoload_paths.unshift Rails.root.join('lib')
+    config.autoload_paths << Rails.root.join('lib')
 
     config.generators do |g|
       g.orm :active_record
@@ -23,6 +25,5 @@ module Bondooman
       g.assets false
       g.helper false
     end
-    config.active_record.raise_in_transactional_callbacks = true
   end
 end
