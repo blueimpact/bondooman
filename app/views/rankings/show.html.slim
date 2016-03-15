@@ -1,20 +1,20 @@
-ul.nav.nav-pills
-  li
-    a=t @ranking.platform, scope: 'platforms'
-  li
-    a= @ranking.genre
-  li
-    a= @ranking.segment
+h2
+  span=t @ranking.platform, scope: 'platforms'
+  span<= @ranking.genre
+  span<= @ranking.segment
+  small.pull-right
+    i.fa.fa-clock-o>
+    =l @ranking.created_at.to_date
 
-hr
 table.table.table-bordered.table-condensed.table-hover
-  caption= render 'layouts/paginate_info', items: @ranking.shots.page
+  caption
+    = render 'layouts/paginate_info', items: @ranking.shots.page
   - @ranking.shots.each do |shot|
     tr
       td= shot.rank
       td
         a href=shot.url target="_blank"
-          img src=shot.image_url height="50px"
+          img.app-icon src=shot.image_url
       td= shot.title
       td= shot.author
       td.text-right= number_to_currency shot.price

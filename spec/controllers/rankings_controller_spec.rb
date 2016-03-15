@@ -1,11 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe RankingsController, type: :controller do
+  describe 'GET #latest' do
+    it 'assigns latest rankings for every group as @rankings' do
+      genres = FactoryGirl.create_list(:genre, 2)
+      segments = FactoryGirl.create_list(:segment, 2)
+      rankings = Item::PLATFORMS.product(genres, segments).map do |p, g, s|
+        FactoryGirl.create_list(
+          :ranking, 2, platform: p, genre: g, segment: s
+        ).last
+      end
+      get :latest
+      expect(assigns(:rankings)).to eq rankings
+    end
+  end
+
   describe 'GET #index' do
     it 'assigns all rankings as @rankings' do
       rankings = FactoryGirl.create_list(:ranking, 2)
       get :index
-      expect(assigns(:rankings)).to eq rankings
+      expect(assigns(:rankings)).to eq rankings.reverse
     end
   end
 

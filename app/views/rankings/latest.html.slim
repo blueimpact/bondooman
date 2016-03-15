@@ -1,0 +1,36 @@
+- @rankings.each_slice(3) do |rankings|
+  .row
+    - rankings.each do |ranking|
+      .col-md-4
+        .panel class="panel-#{ranking.platform}"
+          .panel-heading
+            span=t ranking.platform, scope: 'platforms'
+            span<= ranking.genre
+            span<= ranking.segment
+          ul.list-group.media-list
+            - ranking.shots.each do |shot|
+              li.list-group-item
+                .media-left
+                  a href=shot.url target="_blank"
+                    img.media-object.app-icon src=shot.image_url
+                .media-body
+                  .media-heading
+                    = shot.rank
+                    | .
+                    span.text-large<= shot.title
+                  .clearfix
+                    small.pull-left.text-muted.= shot.author
+                    .pull-right= number_to_currency shot.price
+                  .clearfix
+                    .pull-left
+                      i.fa.fa-star>
+                      = '%.1f' % shot.rating
+                    .pull-right
+                      i.fa.fa-comment>
+                      = number_with_delimiter shot.rating_count
+                  .text-right
+                    i.fa.fa-download>
+                    - if shot.download_count
+                      span= number_with_delimiter shot.download_count_min.to_i
+                      span 〜
+                      span= number_with_delimiter shot.download_count_max.to_i

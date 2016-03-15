@@ -1,9 +1,19 @@
 class RankingsController < ApplicationController
   before_action :set_ranking, only: [:show, :destroy]
 
+  # GET /rankings/latest
+  def latest
+    ranking_ids =
+      Ranking.group(:platform).group(:genre_id).group(:segment_id)
+      .maximum(:id).values
+    @rankings =
+      Ranking.includes(:genre, :segment, :shots).ordered.find(ranking_ids)
+  end
+
   # GET /rankings
   def index
-    @rankings = Ranking.page(params[:page])
+    @rankings =
+      Ranking.includes(:genre, :segment).order(id: :desc).page(params[:page])
   end
 
   # GET /rankings/1
