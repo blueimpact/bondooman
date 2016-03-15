@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314132911) do
+ActiveRecord::Schema.define(version: 20160315134554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(version: 20160314132911) do
     t.string   "image_url"
     t.float    "rating"
     t.integer  "rating_count"
-    t.integer  "download_count_min"
-    t.integer  "download_count_max"
+    t.float    "download_count_min"
+    t.float    "download_count_max"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "ranking_id"
