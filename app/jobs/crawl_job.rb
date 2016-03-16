@@ -3,12 +3,8 @@ class CrawlJob < ActiveJob::Base
     shot_attributes =
       %w(url title author price image_url rating rating_count download_count)
 
-    crawler = crawler_class.new(
-      genre: (genre_keys[genre.name] || genre.name).to_sym,
-      segment: segment.name.to_sym
-    )
-
-    items = crawler.load_ranking.take(20).each(&:update!)
+    crawler = create_crawler(genre, segment)
+    items = crawler.load_ranking.take(20).map { |item| crawler.find item.id }
 
     ranking = Ranking.new(platform: platform, genre: genre, segment: segment)
     items.each_with_index do |item, i|
@@ -26,18 +22,5 @@ class CrawlJob < ActiveJob::Base
 
   def platform
     self.class::PLATFORM
-  end
-
-  def crawler_class
-    case platform
-    when :googleplay
-      PlayStore::GooglePlay::Crawler
-    when :appstore
-      PlayStore::AppStore::Crawler
-    end
-  end
-
-  def genre_keys
-    {}
   end
 end
