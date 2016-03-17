@@ -10,6 +10,20 @@ class RankingsController < ApplicationController
       Ranking.includes(:genre, :segment, :shots).ordered.find(ranking_ids)
   end
 
+  # GET /rankings/:platform/:genre/:segment
+  def transition
+    @platform = params[:platform]
+    @genre = Genre.find_by(name: params[:genre])
+    @segment = Segment.find_by(name: params[:segment])
+    ranking_ids =
+      Ranking.where(platform: @platform, genre: @genre, segment: @segment)
+      .order(created_on: :desc).limit(8)
+      .group(:created_on).maximum(:id).values
+    @rankings =
+      Ranking.includes(:genre, :segment, :shots).order(created_at: :desc)
+      .find(ranking_ids)
+  end
+
   # GET /rankings
   def index
     @rankings =

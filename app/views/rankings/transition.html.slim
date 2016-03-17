@@ -1,3 +1,34 @@
+ul.nav.nav-pills
+  li.dropdown
+    a.dropdown-toggle data-toggle="dropdown" href="#"
+      =t @platform, scope: 'platforms'
+      span.caret<
+    ul.dropdown-menu
+      li.dropdown-header= Ranking.human_attribute_name(:platform)
+      - Item::PLATFORMS.each do |platform|
+        li class=((@platform == platform) ? 'active' : '')
+          a href=transition_rankings_path(platform, @genre.name, @segment.name)
+            =t platform, scope: 'platforms'
+  li.dropdown
+    a.dropdown-toggle data-toggle="dropdown" href="#"
+      = @genre
+      span.caret<
+    ul.dropdown-menu
+      li.dropdown-header= Ranking.human_attribute_name(:genre)
+      - Genre.order(:id).each do |genre|
+        li class=((@genre == genre) ? 'active' : '')
+          a href=transition_rankings_path(@platform, genre.name, @segment.name)
+            = genre
+  li.dropdown
+    a.dropdown-toggle data-toggle="dropdown" href="#"
+      = @segment
+      span.caret<
+    ul.dropdown-menu
+      li.dropdown-header= Ranking.human_attribute_name(:segment)
+      - Segment.order(:id).each do |segment|
+        li class=((@segment == segment) ? 'active' : '')
+          a href=transition_rankings_path(@platform, @genre.name, segment.name)
+            = segment
 - @rankings.each_slice(3) do |rankings|
   .row
     - rankings.each do |ranking|
@@ -7,11 +38,6 @@
             i.fa.fa-clock-o>
             =l ranking.created_at.to_date
         .panel class="panel-#{ranking.platform}"
-          .panel-heading
-            a href=transition_rankings_path(ranking.platform, ranking.genre.name, ranking.segment.name)
-              span=t ranking.platform, scope: 'platforms'
-              span<= ranking.genre
-              span<= ranking.segment
           ul.list-group.media-list
             - ranking.shots.each do |shot|
               li.list-group-item

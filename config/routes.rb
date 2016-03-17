@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :rankings, only: [:index, :show, :destroy] do
     collection do
       get :latest
+      get ':platform/:genre/:segment', action: 'transition', as: 'transition'
     end
   end
 

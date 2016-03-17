@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315134554) do
+ActiveRecord::Schema.define(version: 20160317094955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20160315134554) do
     t.integer  "segment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date     "created_on", null: false
   end
 
   add_index "rankings", ["genre_id"], name: "index_rankings_on_genre_id", using: :btree

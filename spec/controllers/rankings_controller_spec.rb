@@ -15,6 +15,23 @@ RSpec.describe RankingsController, type: :controller do
     end
   end
 
+  describe 'GET #transition' do
+    it 'assigns rankings for specific group as @rankings' do
+      group = {
+        platform: Item::PLATFORMS.first,
+        genre: FactoryGirl.create(:genre),
+        segment: FactoryGirl.create(:segment)
+      }
+      rankings = [
+        FactoryGirl.create(:ranking, group.merge(created_at: 2.days.ago)),
+        FactoryGirl.create(:ranking, group.merge(created_at: 1.days.ago))
+      ]
+      params = group.transform_values { |v| v.try(:name) || v }
+      get :transition, params
+      expect(assigns(:rankings)).to eq rankings.reverse
+    end
+  end
+
   describe 'GET #index' do
     it 'assigns all rankings as @rankings' do
       rankings = FactoryGirl.create_list(:ranking, 2)
