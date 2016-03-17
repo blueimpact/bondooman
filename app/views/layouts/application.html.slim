@@ -24,14 +24,26 @@ html lang="ja"
           i.fa.fa-bars.fa-lg.text-primary
         a.navbar-brand href=root_path =t 'header.site_title'
         .navbar-collapse.collapse.navbar-responsive-collapse
-          ul.nav.navbar-nav
-            - [Ranking, Genre, Segment].each do |model_class|
-              - name = model_class.model_name
-              - active = controller_name == name.plural ? 'active' : ''
-              li class=active = link_to name.human, [name.plural]
-            - if respond_to? :sidekiq_web_path
-              li.divider
-              li= link_to 'Sidekiq', sidekiq_web_path, target: '_blank'
+          - if authenticated?
+            ul.nav.navbar-nav
+              - if authenticated? :admin
+                li.divider-vertical
+                li.dropdown
+                  a.dropdown-toggle data-toggle="dropdown" href="#"
+                    =t 'nav.admin_menu'
+                    span.caret<
+                  ul.dropdown-menu
+                    - [Ranking, Genre, Segment].each do |model_class|
+                      - name = model_class.model_name
+                      - active = controller_name == name.plural ? 'active' : ''
+                      li class=active = link_to name.human, [name.plural]
+                    - if respond_to?(:sidekiq_web_path)
+                      li.divider
+                      li= link_to 'Sidekiq', sidekiq_web_path, target: '_blank'
+            ul.nav.navbar-nav.navbar-right
+              li
+                span.navbar-text= current_user.email
+              li= link_to t('nav.logout'), logout_path, method: :delete
     .container
       .row
         .col-lg-12

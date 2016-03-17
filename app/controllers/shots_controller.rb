@@ -1,4 +1,5 @@
 class ShotsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_shot, only: [:show]
 
   # GET /shots

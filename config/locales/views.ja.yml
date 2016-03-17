@@ -6,6 +6,7 @@ ja:
     login: ログイン
     logout: ログアウト
     item_list: '%{item}一覧'
+    admin_menu: 管理メニュー
   helpers:
     links:
       new: 新規登録

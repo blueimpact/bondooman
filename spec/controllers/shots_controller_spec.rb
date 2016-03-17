@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ShotsController, type: :controller do
+  login_user
+
   describe 'GET #index' do
     it 'assigns all shots as @shots' do
       shots = FactoryGirl.create_list(:shot, 2)

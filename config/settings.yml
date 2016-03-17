@@ -1,5 +1,8 @@
 defaults: &defaults
-  dummy: dummy
+  ubermensch:
+    app_url: <%= ENV["UBERMENSCH_APP_URL"] %>
+    app_key: <%= ENV["UBERMENSCH_APP_KEY"] %>
+    app_secret: <%= ENV["UBERMENSCH_APP_SECRET"] %>
 
 development:
   <<: *defaults

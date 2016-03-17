@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ItemsController, type: :controller do
+  login_user
+
   describe 'GET #index' do
     it 'assigns all items as @items' do
       items = FactoryGirl.create_list(:item, 2)

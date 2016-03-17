@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe GenresController, type: :controller do
+  login_admin
+
   let(:valid_attributes) do
     {
       name: 'genre',

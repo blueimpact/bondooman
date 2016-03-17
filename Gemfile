@@ -20,6 +20,9 @@ gem 'sidekiq'
 gem 'sidekiq-limit_fetch'
 gem 'sinatra', require: false
 
+gem 'omniauth'
+gem 'omniauth-oauth2', '~> 1.3.1'
+
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'compass-rails'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317094955) do
+ActiveRecord::Schema.define(version: 20160317112717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,14 @@ ActiveRecord::Schema.define(version: 20160317094955) do
   add_index "shots", ["item_id"], name: "index_shots_on_item_id", using: :btree
   add_index "shots", ["ranking_id"], name: "index_shots_on_ranking_id", using: :btree
   add_index "shots", ["segment_id"], name: "index_shots_on_segment_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "provider",   null: false
+    t.string   "uid",        null: false
+    t.json     "raw"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   add_foreign_key "rankings", "genres"
   add_foreign_key "rankings", "segments"

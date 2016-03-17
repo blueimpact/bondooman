@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe RankingsController, type: :controller do
+  login_user
+
   describe 'GET #latest' do
     it 'assigns latest rankings for every group as @rankings' do
       genres = FactoryGirl.create_list(:genre, 2)
