@@ -37,6 +37,10 @@ Style/ClassAndModuleChildren:
 Style/Documentation:
   Enabled: false
 
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+Style/FormatString:
+  Enabled: false
+
 # Configuration parameters: MinBodyLength.
 Style/GuardClause:
   Enabled: false
@@ -59,6 +63,10 @@ Style/MethodDefParentheses:
 Style/MultilineBlockLayout:
   Exclude:
     - 'spec/**/*'
+
+# Cop supports --auto-correct.
+Style/PerlBackrefs:
+  Enabled: false
 
 # Cop supports --auto-correct.
 Style/SingleSpaceBeforeFirstArg:

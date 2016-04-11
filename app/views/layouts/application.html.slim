@@ -33,7 +33,7 @@ html lang="ja"
                     =t 'nav.admin_menu'
                     span.caret<
                   ul.dropdown-menu
-                    - [Ranking, Genre, Segment].each do |model_class|
+                    - [Ranking, Genre, Segment, Formatter].each do |model_class|
                       - name = model_class.model_name
                       - active = controller_name == name.plural ? 'active' : ''
                       li class=active = link_to name.human, [name.plural]

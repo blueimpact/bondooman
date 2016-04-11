@@ -1,5 +1,6 @@
 class Shot < ActiveRecord::Base
   belongs_to :item
+  belongs_to :ranking
   belongs_to :genre
   belongs_to :segment
 
@@ -21,5 +22,15 @@ class Shot < ActiveRecord::Base
     else
       fail ArgumentError, 'argument does not respond to minmax'
     end
+  end
+
+  def last_shot
+    @last_shot ||=
+      ranking.last_ranking &&
+      ranking.last_ranking.shots.find_by(item_id: item_id)
+  end
+
+  def last_rank
+    last_shot.try :rank
   end
 end

@@ -10,4 +10,8 @@ FactoryGirl.define do
       end
     end
   end
+
+  trait :with_ranking do
+    ranking
+  end
 end

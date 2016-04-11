@@ -1,6 +1,7 @@
 ja:
   date:
     formats:
+      explicit: '%Y年%m月%d日'
       default: ! '%Y/%m/%d'
   datetime:
     distance_in_words:

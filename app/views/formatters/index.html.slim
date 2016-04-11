@@ -1,0 +1,10 @@
+- if @formatters.present?
+  = paginate @formatters
+  table.table.table-bordered.table-condensed.table-hover
+    caption= render 'layouts/paginate_info', items: @formatters
+    = render @formatters
+- else
+  .alert
+    p.text-muted=t 'messages.no_item', item: Formatter.model_name.human
+
+= link_to t('helpers.links.new'), [:new, :formatter], :class => 'btn btn-success'
