@@ -51,7 +51,7 @@ class Formatter < ActiveRecord::Base
   private
 
   def interpolate text, obj, handlers
-    text.gsub(/<<(\w+)(%.*?)?(\|.*?)?>>/) do
+    text.gsub(/{{(\w+)(%.*?)?(\|.*?)?}}/) do
       key = $1.to_sym
       arg = $2
       fn = handlers[key] || ->(_) { obj.send key }
