@@ -7,4 +7,8 @@ FactoryGirl.define do
   trait :with_genre do
     genre
   end
+
+  trait :without_genre do
+    genre nil
+  end
 end

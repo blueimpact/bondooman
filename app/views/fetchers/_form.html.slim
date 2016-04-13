@@ -1,0 +1,28 @@
+= form_for @fetcher, :html => { :class => "form-horizontal" } do |f|
+  .form-group
+    = f.label :type, class: 'control-label col-md-2'
+    .col-md-10
+      = f.text_field :type, class: 'form-control'
+  .form-group
+    = f.label :platform, class: 'control-label col-md-2'
+    .col-md-10
+      - choices = Item::PLATFORMS.map { |p| [t(p, scope: 'platforms'), p] }
+      = f.select :platform, choices, {}, class: 'form-control'
+  .form-group
+    = f.label :genre, class: 'control-label col-md-2'
+    .col-md-10
+      - choices = Genre.order(:id).map { |g| [g.label, g.id] }
+      = f.select :genre_id, choices, { include_blank: true }, class: 'form-control'
+  .form-group
+    = f.label :segment, class: 'control-label col-md-2'
+    .col-md-10
+      - choices = Segment.order(:id).map { |g| [g.label, g.id] }
+      = f.select :segment_id, choices, { include_blank: true }, class: 'form-control'
+  .form-group
+    = f.label :extras, class: 'control-label col-md-2'
+    .col-md-10
+      = f.text_area :extras, class: 'form-control'
+  .form-group
+    .col-md-offset-2.col-md-10
+      = f.submit nil, :class => 'btn btn-primary'
+      = link_to t('helpers.links.cancel'), @fetcher, class: 'btn btn-default'

@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411093415) do
+ActiveRecord::Schema.define(version: 20160413084313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "fetchers", force: :cascade do |t|
+    t.string   "type"
+    t.string   "platform"
+    t.integer  "genre_id"
+    t.integer  "segment_id"
+    t.json     "extras"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "fetchers", ["genre_id"], name: "index_fetchers_on_genre_id", using: :btree
+  add_index "fetchers", ["segment_id"], name: "index_fetchers_on_segment_id", using: :btree
 
   create_table "formatters", force: :cascade do |t|
     t.text     "item",       default: "", null: false
@@ -89,6 +102,8 @@ ActiveRecord::Schema.define(version: 20160411093415) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "fetchers", "genres"
+  add_foreign_key "fetchers", "segments"
   add_foreign_key "rankings", "genres"
   add_foreign_key "rankings", "segments"
   add_foreign_key "shots", "genres"

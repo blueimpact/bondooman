@@ -7,4 +7,8 @@ FactoryGirl.define do
   trait :with_segment do
     segment
   end
+
+  trait :without_segment do
+    segment nil
+  end
 end

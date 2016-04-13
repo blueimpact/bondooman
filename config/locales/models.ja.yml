@@ -7,6 +7,7 @@ ja:
       item: アイテム
       shot: ショット
       formatter: フォーマッター
+      fetcher: 取得器
     attributes:
       timestamps: &timestamps
         created_at: 作成日時
@@ -32,3 +33,9 @@ ja:
         item: 各アイテム
         pre: プリ
         post: ポスト
+      fetcher:
+        <<: *models
+        <<: *timestamps
+        id: ID
+        type: タイプ
+        platform: プラットフォーム
