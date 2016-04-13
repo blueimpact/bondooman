@@ -41,7 +41,9 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
+  gem 'rack-livereload'
 
+  gem 'rspec'
   gem 'rspec-rails'
   gem 'spring'
   gem 'spring-commands-rspec'

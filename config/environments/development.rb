@@ -1,4 +1,6 @@
 Rails.application.configure do
+  config.middleware.use Rack::LiveReload
+
   config.action_mailer.delivery_method = :letter_opener
 
   config.cache_classes = false
