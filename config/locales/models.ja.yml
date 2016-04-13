@@ -8,6 +8,8 @@ ja:
       shot: ショット
       formatter: フォーマッター
       fetcher: 取得器
+      item_fetcher: アイテム取得器
+      ranking_fetcher: ランキング取得器
     attributes:
       timestamps: &timestamps
         created_at: 作成日時
@@ -33,9 +35,12 @@ ja:
         item: 各アイテム
         pre: プリ
         post: ポスト
-      fetcher:
+      fetcher: &fetcher
         <<: *models
         <<: *timestamps
         id: ID
         type: タイプ
         platform: プラットフォーム
+      item_fetcher:
+        <<: *fetcher
+        item_code: アプリID

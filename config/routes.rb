@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   resources :items, only: [:index, :show]
   resources :shots, only: [:index, :show]
   resources :formatters
-  resources :fetchers
+  resources :fetchers, only: [:index]
+  resources :item_fetchers
+  resources :ranking_fetchers
 
   unless Rails.env.test?
     require 'sidekiq/web'

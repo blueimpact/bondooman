@@ -1,0 +1,12 @@
+- fetcher = item_fetcher
+tr
+  td=t fetcher.type.underscore, scope: 'fetchers'
+  td=t fetcher.platform, scope: 'platforms'
+  td colspan="2" = fetcher.item_code
+  td
+    a.btn.btn-default.btn-xs href=url_for(fetcher)
+      i.fa.fa-list
+    a.btn.btn-default.btn-xs href=url_for([:edit, fetcher])
+      i.fa.fa-pencil
+    a.btn.btn-default.btn-xs href=url_for(fetcher) data-method="delete"
+      i.fa.fa-times.text-danger

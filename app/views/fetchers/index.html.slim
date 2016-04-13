@@ -1,3 +1,5 @@
+= render 'index_header'
+
 - if @fetchers.present?
   = paginate @fetchers
   table.table.table-bordered.table-condensed.table-hover
@@ -5,6 +7,12 @@
     = render @fetchers
 - else
   .alert
-    p.text-muted=t 'messages.no_item', item: Fetcher.model_name.human
+    p.text-muted=t 'messages.no_item', item: model_class.model_name.human
 
-= link_to t('helpers.links.new'), [:new, :fetcher], :class => 'btn btn-success'
+= link_to [:new, :item_fetcher], :class => 'btn btn-success' do
+  i.fa.fa-plus>
+  = ItemFetcher.model_name.human
+= link_to [:new, :ranking_fetcher], :class => 'btn btn-success' do
+  i.fa.fa-plus>
+  = RankingFetcher.model_name.human
+

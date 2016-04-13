@@ -1,0 +1,17 @@
+= form_for @fetcher, :html => { :class => "form-horizontal" } do |f|
+  .form-group
+    = f.label :type, class: 'control-label col-md-2'
+    p.form-control-static.col-md-6=t @fetcher.type.underscore, scope: 'fetchers'
+  .form-group
+    = f.label :platform, class: 'control-label col-md-2'
+    .col-md-6
+      - choices = Item::PLATFORMS.map { |p| [t(p, scope: 'platforms'), p] }
+      = f.select :platform, choices, {}, class: 'form-control'
+  .form-group
+    = f.label :item_code, class: 'control-label col-md-2'
+    .col-md-6
+      = f.text_field :item_code, class: 'form-control'
+  .form-group
+    .col-md-offset-2.col-md-6
+      = f.submit nil, :class => 'btn btn-primary'
+      = link_to t('helpers.links.cancel'), [:fetchers], class: 'btn btn-default'

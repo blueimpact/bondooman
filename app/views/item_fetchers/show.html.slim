@@ -1,0 +1,11 @@
+.form.form-horizontal
+  .form-group
+    label.control-label.col-md-2= Fetcher.human_attribute_name(:type)
+    p.form-control-static.col-md-10=t @fetcher.type.underscore, scope: 'fetchers'
+  .form-group
+    label.control-label.col-md-2= Fetcher.human_attribute_name(:platform)
+    p.form-control-static.col-md-10=t @fetcher.platform, scope: 'platforms'
+  .form-group
+    .col-md-offset-2.col-md-6
+      = link_to t('helpers.links.edit'), [:edit, @fetcher], :class => 'btn btn-default'
+      = link_to t('helpers.links.cancel'), [:fetchers], class: 'btn btn-default'

@@ -1,0 +1,5 @@
+ul.nav.nav-pills
+  - %w(fetchers item_fetchers ranking_fetchers).each do |key|
+    li class=((controller_name == key) ? 'active' : '')
+      a href=url_for([key])
+        =t key.singularize, scope: 'activerecord.models'

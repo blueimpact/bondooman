@@ -28,3 +28,6 @@ ja:
   platforms:
     googleplay: GooglePlay
     appstore: AppStore
+  fetchers:
+    item_fetcher: アイテム
+    ranking_fetcher: ランキング
