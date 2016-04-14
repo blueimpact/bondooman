@@ -8,7 +8,7 @@ class ItemFetcher < Fetcher
   before_validation :save_item_code
 
   def items
-    Item.where(item_code_id: item_code_id).order(id: :desc)
+    Item.where(item_code_id: item_code_id, ranking_id: nil).order(id: :desc)
   end
 
   def item_code_code= arg
