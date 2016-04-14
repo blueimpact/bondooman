@@ -1,12 +1,11 @@
 class Item < ActiveRecord::Base
   belongs_to :item_code
   belongs_to :ranking
-  belongs_to :genre
-  belongs_to :segment
 
   validates :item_code_id, presence: true
-  validates :genre_id, presence: true
-  validates :segment_id, presence: true
+
+  delegate :genre, :genre_id, to: :ranking, allow_nil: true
+  delegate :segment, :segment_id, to: :ranking, allow_nil: true
 
   def download_count
     download_count_min && download_count_max &&

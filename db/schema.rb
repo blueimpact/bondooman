@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414101921) do
+ActiveRecord::Schema.define(version: 20160414110336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,8 +55,6 @@ ActiveRecord::Schema.define(version: 20160414101921) do
 
   create_table "items", force: :cascade do |t|
     t.integer  "item_code_id"
-    t.integer  "genre_id"
-    t.integer  "segment_id"
     t.integer  "rank"
     t.string   "url"
     t.string   "title"
@@ -72,10 +70,8 @@ ActiveRecord::Schema.define(version: 20160414101921) do
     t.integer  "ranking_id"
   end
 
-  add_index "items", ["genre_id"], name: "index_items_on_genre_id", using: :btree
   add_index "items", ["item_code_id"], name: "index_items_on_item_code_id", using: :btree
   add_index "items", ["ranking_id"], name: "index_items_on_ranking_id", using: :btree
-  add_index "items", ["segment_id"], name: "index_items_on_segment_id", using: :btree
 
   create_table "rankings", force: :cascade do |t|
     t.string   "platform"
@@ -107,10 +103,8 @@ ActiveRecord::Schema.define(version: 20160414101921) do
   add_foreign_key "fetchers", "genres"
   add_foreign_key "fetchers", "item_codes"
   add_foreign_key "fetchers", "segments"
-  add_foreign_key "items", "genres"
   add_foreign_key "items", "item_codes"
   add_foreign_key "items", "rankings"
-  add_foreign_key "items", "segments"
   add_foreign_key "rankings", "genres"
   add_foreign_key "rankings", "segments"
 end
