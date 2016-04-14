@@ -4,20 +4,24 @@ RSpec.describe RankingFetchersController, type: :controller do
   login_admin
 
   it_behaves_like FetchersController do
-    let(:genre) { FactoryGirl.create(:genre) }
-
-    let(:segment) { FactoryGirl.create(:segment) }
-
     let(:valid_attributes) {
       {
         platform: Item::PLATFORMS.first,
-        genre_id: genre.id,
-        segment_id: segment.id
+        genre_id: FactoryGirl.create(:genre).id,
+        segment_id: FactoryGirl.create(:segment).id
       }
     }
 
     let(:invalid_attributes) {
       { platform: nil }
+    }
+
+    let(:new_attributes) {
+      {
+        platform: Item::PLATFORMS.last,
+        genre_id: FactoryGirl.create(:genre).id,
+        segment_id: FactoryGirl.create(:segment).id
+      }
     }
   end
 end

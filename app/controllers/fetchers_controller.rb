@@ -8,7 +8,8 @@ class FetchersController < ApplicationController
   # GET /item_fetchers
   # GET /ranking_fetchers
   def index
-    @fetchers = model_class.includes(:genre, :segment).page(params[:page])
+    @fetchers =
+      model_class.includes(:genre, :segment, :item).page(params[:page])
   end
 
   # GET /item_fetchers/1

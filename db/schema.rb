@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413084313) do
+ActiveRecord::Schema.define(version: 20160414040402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,9 +24,11 @@ ActiveRecord::Schema.define(version: 20160413084313) do
     t.json     "extras"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "item_id"
   end
 
   add_index "fetchers", ["genre_id"], name: "index_fetchers_on_genre_id", using: :btree
+  add_index "fetchers", ["item_id"], name: "index_fetchers_on_item_id", using: :btree
   add_index "fetchers", ["segment_id"], name: "index_fetchers_on_segment_id", using: :btree
 
   create_table "formatters", force: :cascade do |t|
@@ -103,6 +105,7 @@ ActiveRecord::Schema.define(version: 20160413084313) do
   end
 
   add_foreign_key "fetchers", "genres"
+  add_foreign_key "fetchers", "items"
   add_foreign_key "fetchers", "segments"
   add_foreign_key "rankings", "genres"
   add_foreign_key "rankings", "segments"

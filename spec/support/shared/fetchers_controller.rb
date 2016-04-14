@@ -72,18 +72,13 @@ shared_examples_for FetchersController do
 
   describe 'PUT #update' do
     context 'with valid params' do
-      let(:new_attributes) {
-        {
-          platform: Item::PLATFORMS.last,
-          item_code: 'test.bondooman.new-item'
-        }
-      }
-
       it 'updates the requested fetcher' do
         fetcher = FactoryGirl.create(model_sym)
         put :update, { id: fetcher.id, model_sym => new_attributes }
         fetcher.reload
-        expect(fetcher.platform).to eq Item::PLATFORMS.last
+        new_attributes.each do |k, v|
+          expect(fetcher.send k).to eq v
+        end
       end
 
       it 'assigns the requested fetcher as @fetcher' do
