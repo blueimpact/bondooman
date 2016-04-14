@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :genres
   resources :segments
-  resources :items, only: [:index, :show]
+  resources :item_codes, only: [:index, :show]
   resources :shots, only: [:index, :show]
   resources :formatters
   resources :fetchers, only: [:index]

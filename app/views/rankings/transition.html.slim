@@ -5,7 +5,7 @@ ul.nav.nav-pills
       span.caret<
     ul.dropdown-menu
       li.dropdown-header= Ranking.human_attribute_name(:platform)
-      - Item::PLATFORMS.each do |platform|
+      - ItemCode::PLATFORMS.each do |platform|
         li class=((@platform == platform) ? 'active' : '')
           a href=transition_rankings_path(platform, @genre.name, @segment.name)
             =t platform, scope: 'platforms'

@@ -10,7 +10,7 @@ class CrawlJob < ActiveJob::Base
     items.each_with_index do |item, i|
       ranking.shots.build(
         {
-          item: Item.find_or_create_by(platform: platform, code: item.id),
+          item: ItemCode.find_or_create_by(platform: platform, code: item.id),
           genre: genre,
           segment: segment,
           rank: i + 1

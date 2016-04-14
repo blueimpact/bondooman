@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :shot do
-    item
+    item_code
     genre
     segment
     sequence(:rank) { |i| i }

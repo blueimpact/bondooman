@@ -4,12 +4,10 @@ RSpec.describe ItemFetchersController, type: :controller do
   login_admin
 
   it_behaves_like FetchersController do
-    let(:item) { FactoryGirl.create(:item) }
-
     let(:valid_attributes) {
       {
-        platform: Item::PLATFORMS.first,
-        item_code: 'test.bondooman.new-item'
+        platform: ItemCode::PLATFORMS.first,
+        item_code_code: 'test.bondooman.new-item'
       }
     }
 
@@ -19,8 +17,8 @@ RSpec.describe ItemFetchersController, type: :controller do
 
     let(:new_attributes) {
       {
-        platform: Item::PLATFORMS.last,
-        item_code: 'test.bondooman.new-item'
+        platform: ItemCode::PLATFORMS.last,
+        item_code_code: 'test.bondooman.new-item'
       }
     }
   end

@@ -12,6 +12,6 @@ class ItemFetchersController < FetchersController
   protected
 
   def fetcher_params
-    params.require(:item_fetcher).permit(:platform, :item_code)
+    params.require(:item_fetcher).permit(:platform, :item_code_code)
   end
 end

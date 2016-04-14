@@ -1,10 +1,10 @@
 class Shot < ActiveRecord::Base
-  belongs_to :item
+  belongs_to :item_code
   belongs_to :ranking
   belongs_to :genre
   belongs_to :segment
 
-  validates :item_id, presence: true
+  validates :item_code_id, presence: true
   validates :genre_id, presence: true
   validates :segment_id, presence: true
 
@@ -27,7 +27,7 @@ class Shot < ActiveRecord::Base
   def last_shot
     @last_shot ||=
       ranking.last_ranking &&
-      ranking.last_ranking.shots.find_by(item_id: item_id)
+      ranking.last_ranking.shots.find_by(item_code_id: item_code_id)
   end
 
   def last_rank

@@ -6,7 +6,7 @@ RSpec.describe RankingFetchersController, type: :controller do
   it_behaves_like FetchersController do
     let(:valid_attributes) {
       {
-        platform: Item::PLATFORMS.first,
+        platform: ItemCode::PLATFORMS.first,
         genre_id: FactoryGirl.create(:genre).id,
         segment_id: FactoryGirl.create(:segment).id
       }
@@ -18,7 +18,7 @@ RSpec.describe RankingFetchersController, type: :controller do
 
     let(:new_attributes) {
       {
-        platform: Item::PLATFORMS.last,
+        platform: ItemCode::PLATFORMS.last,
         genre_id: FactoryGirl.create(:genre).id,
         segment_id: FactoryGirl.create(:segment).id
       }

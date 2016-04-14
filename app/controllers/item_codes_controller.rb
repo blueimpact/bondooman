@@ -1,10 +1,10 @@
-class ItemsController < ApplicationController
+class ItemCodesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, only: [:show]
 
   # GET /items
   def index
-    @items = Item.page(params[:page])
+    @item_codes = ItemCode.page(params[:page])
   end
 
   # GET /items/1
@@ -14,6 +14,6 @@ class ItemsController < ApplicationController
   private
 
   def set_item
-    @item = Item.find(params[:id])
+    @item_code = ItemCode.find(params[:id])
   end
 end

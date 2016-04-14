@@ -4,12 +4,12 @@ class Ranking < ActiveRecord::Base
   has_many :shots, -> { order(:rank) },
            autosave: true, validate: true, dependent: :destroy
 
-  validates :platform, inclusion: Item::PLATFORMS
+  validates :platform, inclusion: ItemCode::PLATFORMS
   validates :genre_id, presence: true
   validates :segment_id, presence: true
 
   scope :ordered, -> { order(platform: :desc).order(:genre_id, :segment_id) }
-  Item::PLATFORMS.each do |platform|
+  ItemCode::PLATFORMS.each do |platform|
     scope platform.to_sym, -> { where(platform: platform) }
   end
 

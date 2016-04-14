@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414040402) do
+ActiveRecord::Schema.define(version: 20160414054217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,13 +22,13 @@ ActiveRecord::Schema.define(version: 20160414040402) do
     t.integer  "genre_id"
     t.integer  "segment_id"
     t.json     "extras"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "item_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "item_code_id"
   end
 
   add_index "fetchers", ["genre_id"], name: "index_fetchers_on_genre_id", using: :btree
-  add_index "fetchers", ["item_id"], name: "index_fetchers_on_item_id", using: :btree
+  add_index "fetchers", ["item_code_id"], name: "index_fetchers_on_item_code_id", using: :btree
   add_index "fetchers", ["segment_id"], name: "index_fetchers_on_segment_id", using: :btree
 
   create_table "formatters", force: :cascade do |t|
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20160414040402) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "items", force: :cascade do |t|
+  create_table "item_codes", force: :cascade do |t|
     t.string   "platform"
     t.string   "code"
     t.datetime "created_at", null: false
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20160414040402) do
   end
 
   create_table "shots", force: :cascade do |t|
-    t.integer  "item_id"
+    t.integer  "item_code_id"
     t.integer  "genre_id"
     t.integer  "segment_id"
     t.integer  "rank"
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 20160414040402) do
   end
 
   add_index "shots", ["genre_id"], name: "index_shots_on_genre_id", using: :btree
-  add_index "shots", ["item_id"], name: "index_shots_on_item_id", using: :btree
+  add_index "shots", ["item_code_id"], name: "index_shots_on_item_code_id", using: :btree
   add_index "shots", ["ranking_id"], name: "index_shots_on_ranking_id", using: :btree
   add_index "shots", ["segment_id"], name: "index_shots_on_segment_id", using: :btree
 
@@ -105,12 +105,12 @@ ActiveRecord::Schema.define(version: 20160414040402) do
   end
 
   add_foreign_key "fetchers", "genres"
-  add_foreign_key "fetchers", "items"
+  add_foreign_key "fetchers", "item_codes"
   add_foreign_key "fetchers", "segments"
   add_foreign_key "rankings", "genres"
   add_foreign_key "rankings", "segments"
   add_foreign_key "shots", "genres"
-  add_foreign_key "shots", "items"
+  add_foreign_key "shots", "item_codes"
   add_foreign_key "shots", "rankings"
   add_foreign_key "shots", "segments"
 end

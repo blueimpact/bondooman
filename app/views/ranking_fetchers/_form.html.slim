@@ -5,7 +5,7 @@
   .form-group
     = f.label :platform, class: 'control-label col-md-2'
     .col-md-6
-      - choices = Item::PLATFORMS.map { |p| [t(p, scope: 'platforms'), p] }
+      - choices = ItemCode::PLATFORMS.map { |p| [t(p, scope: 'platforms'), p] }
       = f.select :platform, choices, {}, class: 'form-control'
   .form-group
     = f.label :genre, class: 'control-label col-md-2'

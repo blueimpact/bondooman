@@ -5,7 +5,7 @@ RSpec.describe Shot, type: :model do
 
   let(:attrs) {
     subject.attributes.slice(
-      *%w(item_id genre_id segment_id)
+      *%w(item_code_id genre_id segment_id)
     ).symbolize_keys
   }
 
