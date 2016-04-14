@@ -47,8 +47,24 @@ RSpec.describe Formatter, type: :model do
 
     it 'formats nil with |' do
       subject.item_body = '{{last_rank|--}}'
-      expect(item).to receive(:last_rank) { nil }
+      allow(item).to receive(:last_rank) { nil }
       expect(subject.format_item item).to eq '--'
+    end
+
+    it 'drops nil positive line with ?' do
+      subject.item_body = "last_rank?last was {{last_rank}}\n"
+      allow(item).to receive(:last_rank) { 3 }
+      expect(subject.format_item item).to eq "last was 3\n"
+      allow(item).to receive(:last_rank) { nil }
+      expect(subject.format_item item).to eq ''
+    end
+
+    it 'drops nil negative line with !?' do
+      subject.item_body = "last_rank!?this is new\n"
+      allow(item).to receive(:last_rank) { 3 }
+      expect(subject.format_item item).to eq ''
+      allow(item).to receive(:last_rank) { nil }
+      expect(subject.format_item item).to eq "this is new\n"
     end
   end
 

@@ -13,6 +13,8 @@ class Ranking < ActiveRecord::Base
     scope platform.to_sym, -> { where(platform: platform) }
   end
 
+  delegate :count, to: :items, prefix: true
+
   def last_ranking
     @last_ranking ||=
       begin

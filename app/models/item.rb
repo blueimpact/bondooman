@@ -23,6 +23,14 @@ class Item < ActiveRecord::Base
     end
   end
 
+  def download_count_min
+    super.to_i
+  end
+
+  def download_count_max
+    super.to_i
+  end
+
   def last_item
     @last_item ||=
       ranking.last_ranking &&

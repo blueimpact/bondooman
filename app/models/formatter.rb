@@ -2,8 +2,6 @@ class Formatter < ActiveRecord::Base
   validates :item_body, presence: true
 
   ITEM_HANDLERS = {
-    genre: nil,
-    segment: nil,
     rank: nil,
     url: nil,
     title: nil,
@@ -12,8 +10,8 @@ class Formatter < ActiveRecord::Base
     image_url: nil,
     rating: nil,
     rating_count: nil,
-    download_count_min: ->(item) { item.download_count_min.to_i },
-    download_count_max: ->(item) { item.download_count_max.to_i },
+    download_count_min: nil,
+    download_count_max: nil,
     last_rank: nil
   }
 
@@ -22,7 +20,7 @@ class Formatter < ActiveRecord::Base
     genre: nil,
     segment: nil,
     created_on: nil,
-    items_count: ->(ranking) { ranking.items.count }
+    items_count: nil
   }
 
   extend ActiveSupport::NumberHelper
@@ -40,33 +38,54 @@ class Formatter < ActiveRecord::Base
   end
 
   def format_item item
-    interpolate item_body, item, ITEM_HANDLERS
+    interpolate item_body, item
   end
 
   def format_ranking ranking, attr_name
     return if self[attr_name].blank?
-    interpolate self[attr_name], ranking, RANKING_HANDLERS
+    interpolate self[attr_name], ranking
   end
 
   private
 
-  def interpolate text, obj, handlers
-    text.gsub(/{{(\w+)(%.*?)?(\|.*?)?}}/) do
-      key = $1.to_sym
-      arg = $2
-      fn = handlers[key] || ->(_) { obj.send key }
-      val = fn.call(obj)
+  def handlers_for obj
+    case obj
+    when Item
+      ITEM_HANDLERS
+    when Ranking
+      RANKING_HANDLERS
+    end
+  end
+
+  def handle obj, key
+    key = key.to_sym
+    (handlers_for(obj)[key] || ->(o) { o.send key }).call(obj)
+  end
+
+  def interpolate text, obj
+    drop_nil_lines(text, obj).gsub(/{{(\w+)(%.*?)?(\|.*?)?}}/) do
+      val = handle(obj, $1)
       if val.nil? && $3
         $3[1..-1]
-      elsif arg
-        apply arg, val
+      elsif $2
+        apply_format $2, val
       else
         val
       end
     end
   end
 
-  def apply fmt, val
+  def drop_nil_lines text, obj
+    text.gsub(/^(\w+)(!)?\?(.*(\n|$))/) do
+      if $2
+        handle(obj, $1) ? '' : $3
+      else
+        handle(obj, $1) ? $3 : ''
+      end
+    end
+  end
+
+  def apply_format fmt, val
     if fmt =~ /^%(to_\w*)/
       ActiveSupport::NumberHelper.send "number_#{fmt[1..-1]}", val
     elsif val.respond_to? :strftime
