@@ -1,0 +1,19 @@
+tr
+  td= shot.title
+  td= shot.author
+  td.text-right= number_to_currency shot.price
+  td.text-right
+    i.fa.fa-star-o>
+    = '%.1f' % shot.rating
+  td.text-right
+    i.fa.fa-comment-o>
+    = number_with_delimiter shot.rating_count
+  td.text-right
+    i.fa.fa-download>
+    - if shot.download_count
+      span= number_with_delimiter shot.download_count_min.to_i
+      span 〜
+      span= number_with_delimiter shot.download_count_max.to_i
+  td.text-right
+    i.fa.fa-clock-o>
+    =l shot.created_at

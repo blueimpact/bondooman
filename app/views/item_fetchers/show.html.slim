@@ -1,11 +1,23 @@
 .form.form-horizontal
   .form-group
-    label.control-label.col-md-2= Fetcher.human_attribute_name(:type)
+    label.control-label.col-md-2= @fetcher.class.human_attribute_name(:type)
     p.form-control-static.col-md-10=t @fetcher.type.underscore, scope: 'fetchers'
   .form-group
-    label.control-label.col-md-2= Fetcher.human_attribute_name(:platform)
+    label.control-label.col-md-2= @fetcher.class.human_attribute_name(:platform)
     p.form-control-static.col-md-10=t @fetcher.platform, scope: 'platforms'
+  .form-group
+    label.control-label.col-md-2= @fetcher.class.human_attribute_name(:item_code)
+    p.form-control-static.col-md-10= @fetcher.item_code
   .form-group
     .col-md-offset-2.col-md-6
       = link_to t('helpers.links.edit'), [:edit, @fetcher], :class => 'btn btn-default'
       = link_to t('helpers.links.cancel'), [:fetchers], class: 'btn btn-default'
+
+- if @shots.present?
+  = paginate @shots
+  table.table.table-bordered.table-condensed.table-hover
+    caption= render 'layouts/paginate_info', items: @shots
+    = render @shots
+- else
+  .alert
+    p.text-muted=t 'messages.no_item', item: Shot.model_name.human
