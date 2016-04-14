@@ -1,7 +1,7 @@
 class Ranking < ActiveRecord::Base
   belongs_to :genre
   belongs_to :segment
-  has_many :shots, -> { order(:rank) },
+  has_many :items, -> { order(:rank) },
            autosave: true, validate: true, dependent: :destroy
 
   validates :platform, inclusion: ItemCode::PLATFORMS

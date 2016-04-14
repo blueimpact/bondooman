@@ -4,11 +4,11 @@ RSpec.describe FormattersController, type: :controller do
   login_admin
 
   let(:valid_attributes) {
-    { item: 'Item' }
+    { item_body: 'Item Body' }
   }
 
   let(:invalid_attributes) {
-    { item: nil }
+    { item_body: nil }
   }
 
   describe 'GET #index' do
@@ -78,14 +78,14 @@ RSpec.describe FormattersController, type: :controller do
   describe 'PUT #update' do
     context 'with valid params' do
       let(:new_attributes) {
-        { item: 'New Item' }
+        { item_body: 'New Item Body' }
       }
 
       it 'updates the requested formatter' do
         formatter = Formatter.create! valid_attributes
         put :update, { id: formatter.id, formatter: new_attributes }
         formatter.reload
-        expect(formatter.item).to eq 'New Item'
+        expect(formatter.item_body).to eq 'New Item Body'
       end
 
       it 'assigns the requested formatter as @formatter' do

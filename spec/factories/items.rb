@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :shot do
+  factory :item do
     item_code
     genre
     segment

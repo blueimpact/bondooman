@@ -1,7 +1,7 @@
 .form.form-horizontal
   .form-group
-    label.control-label.col-md-2= Formatter.human_attribute_name(:item)
-    pre.form-control-static.col-md-10= @formatter.item
+    label.control-label.col-md-2= Formatter.human_attribute_name(:item_body)
+    pre.form-control-static.col-md-10= @formatter.item_body
   .form-group
     label.control-label.col-md-2= Formatter.human_attribute_name(:pre)
     - if @formatter.pre.present?

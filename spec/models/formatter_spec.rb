@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe Formatter, type: :model do
   subject { FactoryGirl.build(:formatter) }
 
-  let(:shot) {
-    FactoryGirl.create(:shot).tap do |shot|
-      allow(shot).to receive(:last_rank) { nil }
+  let(:item) {
+    FactoryGirl.create(:item).tap do |item|
+      allow(item).to receive(:last_rank) { nil }
     end
   }
 
@@ -14,41 +14,41 @@ RSpec.describe Formatter, type: :model do
   describe '#format_item' do
     Formatter::ITEM_HANDLERS.to_a.reject(&:last).map(&:first).each do |key|
       it "formats #{key}" do
-        val = shot.send(key).to_s
-        subject.item = "#{key}: {{#{key}}}"
-        expect(subject.format_item shot).to eq "#{key}: #{val}"
+        val = item.send(key).to_s
+        subject.item_body = "#{key}: {{#{key}}}"
+        expect(subject.format_item item).to eq "#{key}: #{val}"
       end
     end
 
     it 'formats download_count_min and download_count_max as integer' do
-      subject.item = '{{download_count_min}} - {{download_count_max}}'
-      shot.download_count_min = 1_000_000
-      shot.download_count_max = 5_000_000
-      expect(subject.format_item shot).to eq '1000000 - 5000000'
+      subject.item_body = '{{download_count_min}} - {{download_count_max}}'
+      item.download_count_min = 1_000_000
+      item.download_count_max = 5_000_000
+      expect(subject.format_item item).to eq '1000000 - 5000000'
     end
 
     it 'formats last_rank' do
-      subject.item = '{{last_rank}}'
-      expect(shot).to receive(:last_rank) { 7 }
-      expect(subject.format_item shot).to eq '7'
+      subject.item_body = '{{last_rank}}'
+      expect(item).to receive(:last_rank) { 7 }
+      expect(subject.format_item item).to eq '7'
     end
 
     it 'formats numbers with %' do
-      subject.item = '{{rating%.2f}}'
-      shot.rating = 4.321
-      expect(subject.format_item shot).to eq '4.32'
+      subject.item_body = '{{rating%.2f}}'
+      item.rating = 4.321
+      expect(subject.format_item item).to eq '4.32'
     end
 
     it 'formats numbers with %to_' do
-      subject.item = '{{rating_count%to_delimited}}'
-      shot.rating_count = 3_142_419
-      expect(subject.format_item shot).to eq '3,142,419'
+      subject.item_body = '{{rating_count%to_delimited}}'
+      item.rating_count = 3_142_419
+      expect(subject.format_item item).to eq '3,142,419'
     end
 
     it 'formats nil with |' do
-      subject.item = '{{last_rank|--}}'
-      expect(shot).to receive(:last_rank) { nil }
-      expect(subject.format_item shot).to eq '--'
+      subject.item_body = '{{last_rank|--}}'
+      expect(item).to receive(:last_rank) { nil }
+      expect(subject.format_item item).to eq '--'
     end
   end
 
@@ -56,7 +56,7 @@ RSpec.describe Formatter, type: :model do
     Formatter::RANKING_HANDLERS.to_a.reject(&:last).map(&:first).each do |key|
       it "formats #{key}" do
         val = ranking.send(key).to_s
-        subject.item = "#{key}: {{#{key}}}"
+        subject.item_body = "#{key}: {{#{key}}}"
         expect(subject.format_item ranking).to eq "#{key}: #{val}"
       end
     end
@@ -71,7 +71,7 @@ RSpec.describe Formatter, type: :model do
 
     it 'formats items_count' do
       subject.pre = '{{items_count}}'
-      ranking.shots = FactoryGirl.create_list(:shot, 12)
+      ranking.items = FactoryGirl.create_list(:item, 12)
       expect(subject.format_ranking ranking, :pre).to eq '12'
     end
 

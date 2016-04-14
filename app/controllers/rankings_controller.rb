@@ -8,7 +8,7 @@ class RankingsController < ApplicationController
       Ranking.group(:platform).group(:genre_id).group(:segment_id)
       .maximum(:id).values
     @rankings =
-      Ranking.includes(:genre, :segment, :shots).ordered.find(ranking_ids)
+      Ranking.includes(:genre, :segment, :items).ordered.find(ranking_ids)
   end
 
   # GET /rankings/:platform/:genre/:segment
@@ -21,7 +21,7 @@ class RankingsController < ApplicationController
       .order(created_on: :desc).limit(8)
       .group(:created_on).maximum(:id).values
     @rankings =
-      Ranking.includes(:genre, :segment, :shots).order(created_at: :desc)
+      Ranking.includes(:genre, :segment, :items).order(created_at: :desc)
       .find(ranking_ids)
   end
 

@@ -1,5 +1,5 @@
 class Formatter < ActiveRecord::Base
-  validates :item, presence: true
+  validates :item_body, presence: true
 
   ITEM_HANDLERS = {
     genre: nil,
@@ -12,8 +12,8 @@ class Formatter < ActiveRecord::Base
     image_url: nil,
     rating: nil,
     rating_count: nil,
-    download_count_min: ->(shot) { shot.download_count_min.to_i },
-    download_count_max: ->(shot) { shot.download_count_max.to_i },
+    download_count_min: ->(item) { item.download_count_min.to_i },
+    download_count_max: ->(item) { item.download_count_max.to_i },
     last_rank: nil
   }
 
@@ -22,7 +22,7 @@ class Formatter < ActiveRecord::Base
     genre: nil,
     segment: nil,
     created_on: nil,
-    items_count: ->(ranking) { ranking.shots.count }
+    items_count: ->(ranking) { ranking.items.count }
   }
 
   extend ActiveSupport::NumberHelper
@@ -36,11 +36,11 @@ class Formatter < ActiveRecord::Base
   end
 
   def format_items ranking
-    ranking.shots.map { |shot| format_item shot }
+    ranking.items.map { |item| format_item item }
   end
 
-  def format_item shot
-    interpolate item, shot, ITEM_HANDLERS
+  def format_item item
+    interpolate item_body, item, ITEM_HANDLERS
   end
 
   def format_ranking ranking, attr_name

@@ -8,9 +8,9 @@
       - choices = ItemCode::PLATFORMS.map { |p| [t(p, scope: 'platforms'), p] }
       = f.select :platform, choices, {}, class: 'form-control'
   .form-group
-    = f.label :item_code, class: 'control-label col-md-2'
+    = f.label :item_code_code, class: 'control-label col-md-2'
     .col-md-6
-      = f.text_field :item_code, class: 'form-control'
+      = f.text_field :item_code_code, class: 'form-control'
   .form-group
     .col-md-offset-2.col-md-6
       = f.submit nil, :class => 'btn btn-primary'

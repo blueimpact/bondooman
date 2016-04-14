@@ -13,11 +13,11 @@
       = link_to t('helpers.links.edit'), [:edit, @fetcher], :class => 'btn btn-default'
       = link_to t('helpers.links.cancel'), [:fetchers], class: 'btn btn-default'
 
-- if @shots.present?
-  = paginate @shots
+- if @items.present?
+  = paginate @items
   table.table.table-bordered.table-condensed.table-hover
-    caption= render 'layouts/paginate_info', items: @shots
-    = render @shots
+    caption= render 'layouts/paginate_info', items: @items
+    = render @items
 - else
   .alert
-    p.text-muted=t 'messages.no_item', item: Shot.model_name.human
+    p.text-muted=t 'messages.no_item', item: Item.model_name.human

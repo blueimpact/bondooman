@@ -4,8 +4,8 @@ ja:
       genre: ジャンル
       segment: 区分
       ranking: ランキング
-      item: アイテム
-      shot: ショット
+      item: アプリ
+      item_code: アプリコード
       formatter: フォーマッター
       fetcher: 取得器
       item_fetcher: アイテム取得器
@@ -32,7 +32,7 @@ ja:
       formatter:
         <<: *timestamps
         id: ID
-        item: 各アイテム
+        item_body: 各アイテム
         pre: プリ
         post: ポスト
       fetcher: &fetcher
@@ -43,4 +43,4 @@ ja:
         platform: プラットフォーム
       item_fetcher:
         <<: *fetcher
-        item_code: アプリID
+        item_code_code: アプリコード

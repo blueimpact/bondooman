@@ -8,20 +8,20 @@ h2
 
 table.table.table-bordered.table-condensed.table-hover
   caption
-    = render 'layouts/paginate_info', items: @ranking.shots.page
-  - @ranking.shots.each do |shot|
+    = render 'layouts/paginate_info', items: @ranking.items.page
+  - @ranking.items.each do |item|
     tr
-      td= shot.rank
+      td= item.rank
       td
-        a href=shot.url target="_blank"
-          img.app-icon src=shot.image_url
-      td= shot.title
-      td= shot.author
-      td.text-right= number_to_currency shot.price
-      td.text-right= '%.1f' % shot.rating
-      td.text-right= number_with_delimiter shot.rating_count
+        a href=item.url target="_blank"
+          img.app-icon src=item.image_url
+      td= item.title
+      td= item.author
+      td.text-right= number_to_currency item.price
+      td.text-right= '%.1f' % item.rating
+      td.text-right= number_with_delimiter item.rating_count
       td.text-right
-        - if shot.download_count
-          span= number_with_delimiter shot.download_count_min.to_i
+        - if item.download_count
+          span= number_with_delimiter item.download_count_min.to_i
           span 〜
-          span= number_with_delimiter shot.download_count_max.to_i
+          span= number_with_delimiter item.download_count_max.to_i

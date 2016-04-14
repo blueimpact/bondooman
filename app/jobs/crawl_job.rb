@@ -1,6 +1,6 @@
 class CrawlJob < ActiveJob::Base
   def perform genre, segment
-    shot_attributes =
+    item_attributes =
       %w(url title author price image_url rating rating_count download_count)
 
     crawler = create_crawler(genre, segment)
@@ -8,13 +8,13 @@ class CrawlJob < ActiveJob::Base
 
     ranking = Ranking.new(platform: platform, genre: genre, segment: segment)
     items.each_with_index do |item, i|
-      ranking.shots.build(
+      ranking.items.build(
         {
           item: ItemCode.find_or_create_by(platform: platform, code: item.id),
           genre: genre,
           segment: segment,
           rank: i + 1
-        }.merge(item.attributes.slice(*shot_attributes))
+        }.merge(item.attributes.slice(*item_attributes))
       )
     end
     ranking.save!

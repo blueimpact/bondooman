@@ -1,5 +1,5 @@
 class Segment < ActiveRecord::Base
-  has_many :shots
+  has_many :items
 
   validates :name, presence: true
 

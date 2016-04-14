@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Shot, type: :model do
-  subject { FactoryGirl.create(:shot, :with_ranking) }
+RSpec.describe Item, type: :model do
+  subject { FactoryGirl.create(:item, :with_ranking) }
 
   let(:attrs) {
     subject.attributes.slice(
@@ -20,24 +20,24 @@ RSpec.describe Shot, type: :model do
     FactoryGirl.create(:ranking, ranking_attrs)
   }
 
-  describe '#last_shot' do
-    it 'returns last shot' do
-      last_shot = last_ranking.shots.create(attrs)
-      expect(subject.last_shot).to eq last_shot
+  describe '#last_item' do
+    it 'returns last item' do
+      last_item = last_ranking.items.create(attrs)
+      expect(subject.last_item).to eq last_item
     end
 
     it 'returns nil if not found' do
-      expect(subject.last_shot).to eq nil
+      expect(subject.last_item).to eq nil
     end
   end
 
   describe '#last_rank' do
-    it 'returns rank of last shot' do
-      last_ranking.shots.create(attrs.merge(rank: 7))
+    it 'returns rank of last item' do
+      last_ranking.items.create(attrs.merge(rank: 7))
       expect(subject.last_rank).to eq 7
     end
 
-    it 'returns nil if last shot not found' do
+    it 'returns nil if last item not found' do
       expect(subject.last_rank).to eq nil
     end
   end

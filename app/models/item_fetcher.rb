@@ -3,12 +3,12 @@ class ItemFetcher < Fetcher
   validates :item_code_id, presence: true
   validates :platform, uniqueness: { scope: [:item_code_id] }
 
-  delegate :code, to: :item_code, prefix: true
+  delegate :code, to: :item_code, allow_nil: true, prefix: true
 
   before_validation :save_item_code
 
-  def shots
-    Shot.where(item_code_id: item_code_id).order(id: :desc)
+  def items
+    Item.where(item_code_id: item_code_id).order(id: :desc)
   end
 
   def item_code_code= arg

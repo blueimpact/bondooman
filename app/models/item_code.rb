@@ -1,5 +1,5 @@
 class ItemCode < ActiveRecord::Base
-  has_many :shots, dependent: :destroy
+  has_many :items, dependent: :destroy
 
   PLATFORMS = %w(googleplay appstore)
 

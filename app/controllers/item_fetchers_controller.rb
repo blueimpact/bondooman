@@ -6,7 +6,7 @@ class ItemFetchersController < FetchersController
   # GET /item_fetchers/1
   def show
     super
-    @shots = @fetcher.shots.page
+    @items = @fetcher.items.page
   end
 
   protected

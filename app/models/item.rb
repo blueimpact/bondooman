@@ -1,4 +1,4 @@
-class Shot < ActiveRecord::Base
+class Item < ActiveRecord::Base
   belongs_to :item_code
   belongs_to :ranking
   belongs_to :genre
@@ -24,13 +24,13 @@ class Shot < ActiveRecord::Base
     end
   end
 
-  def last_shot
-    @last_shot ||=
+  def last_item
+    @last_item ||=
       ranking.last_ranking &&
-      ranking.last_ranking.shots.find_by(item_code_id: item_code_id)
+      ranking.last_ranking.items.find_by(item_code_id: item_code_id)
   end
 
   def last_rank
-    last_shot.try :rank
+    last_item.try :rank
   end
 end
