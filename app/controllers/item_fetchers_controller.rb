@@ -6,7 +6,9 @@ class ItemFetchersController < FetchersController
   # GET /item_fetchers/1
   def show
     super
-    @items = @fetcher.items.page
+    @items =
+      @fetcher.items.includes(:item_code)
+      .order(created_at: :desc).page
   end
 
   protected

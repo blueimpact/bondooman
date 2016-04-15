@@ -7,7 +7,6 @@ class RankingFetcher < Fetcher
     Ranking
       .where(platform_name: platform_name)
       .where(genre_id: genre_id, segment_id: segment_id)
-      .order(id: :desc)
   end
 
   def to_s

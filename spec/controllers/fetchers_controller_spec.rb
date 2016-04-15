@@ -10,7 +10,7 @@ RSpec.describe FetchersController, type: :controller do
         *FactoryGirl.create_list(:ranking_fetcher, 2).map(&:rebecome)
       ]
       get :index
-      expect(assigns(:fetchers)).to eq fetchers
+      expect(assigns(:fetchers)).to eq fetchers.reverse
     end
   end
 end

@@ -6,7 +6,9 @@ class RankingFetchersController < FetchersController
   # GET /ranking_fetchers/1
   def show
     super
-    @rankings = @fetcher.rankings.includes(:genre, :segment).page
+    @rankings =
+      @fetcher.rankings.includes(:genre, :segment)
+      .order(created_at: :desc).page
   end
 
   protected

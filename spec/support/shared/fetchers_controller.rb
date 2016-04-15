@@ -10,7 +10,7 @@ shared_examples_for FetchersController do
         *FactoryGirl.create_list(:ranking_fetcher, 2).map(&:rebecome)
       ].select { |f| f.is_a? model_class }
       get :index
-      expect(assigns(:fetchers)).to eq fetchers
+      expect(assigns(:fetchers)).to eq fetchers.reverse
     end
   end
 
