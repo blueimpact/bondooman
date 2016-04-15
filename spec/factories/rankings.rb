@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :ranking do
-    platform ItemCode::PLATFORMS.first
+    platform_name Platform::NAMES.first
     genre
     segment
 

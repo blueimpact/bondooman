@@ -1,14 +1,14 @@
 ul.nav.nav-pills
   li.dropdown
     a.dropdown-toggle data-toggle="dropdown" href="#"
-      =t @platform, scope: 'platforms'
+      = @platform
       span.caret<
     ul.dropdown-menu
       li.dropdown-header= Ranking.human_attribute_name(:platform)
-      - ItemCode::PLATFORMS.each do |platform|
-        li class=((@platform == platform) ? 'active' : '')
-          a href=transition_rankings_path(platform, @genre.name, @segment.name)
-            =t platform, scope: 'platforms'
+      - Platform.all.each do |platform|
+        li class=((@platform == platform.name) ? 'active' : '')
+          a href=transition_rankings_path(platform.name, @genre.name, @segment.name)
+            = platform
   li.dropdown
     a.dropdown-toggle data-toggle="dropdown" href="#"
       = @genre
@@ -17,7 +17,7 @@ ul.nav.nav-pills
       li.dropdown-header= Ranking.human_attribute_name(:genre)
       - Genre.order(:id).each do |genre|
         li class=((@genre == genre) ? 'active' : '')
-          a href=transition_rankings_path(@platform, genre.name, @segment.name)
+          a href=transition_rankings_path(@platform.name, genre.name, @segment.name)
             = genre
   li.dropdown
     a.dropdown-toggle data-toggle="dropdown" href="#"
@@ -27,7 +27,7 @@ ul.nav.nav-pills
       li.dropdown-header= Ranking.human_attribute_name(:segment)
       - Segment.order(:id).each do |segment|
         li class=((@segment == segment) ? 'active' : '')
-          a href=transition_rankings_path(@platform, @genre.name, segment.name)
+          a href=transition_rankings_path(@platform.name, @genre.name, segment.name)
             = segment
 - @rankings.each_slice(3) do |rankings|
   .row
@@ -37,7 +37,7 @@ ul.nav.nav-pills
           small.pull-right.text-muted
             i.fa.fa-clock-o>
             =l ranking.created_at.to_date
-        .panel class="panel-#{ranking.platform}"
+        .panel class="panel-#{ranking.platform_name}"
           ul.list-group.media-list
             - ranking.items.each do |item|
               li.list-group-item

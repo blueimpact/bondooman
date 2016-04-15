@@ -11,7 +11,7 @@ RSpec.describe Item, type: :model do
 
   let(:ranking_attrs) {
     subject.ranking.attributes.slice(
-      *%w(platform genre_id segment_id)
+      *%w(platform_name genre_id segment_id)
     ).symbolize_keys
   }
 

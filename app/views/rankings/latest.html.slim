@@ -6,10 +6,10 @@
           small.pull-right.text-muted
             i.fa.fa-clock-o>
             =l ranking.created_at.to_date
-        .panel class="panel-#{ranking.platform}"
+        .panel class="panel-#{ranking.platform_name}"
           .panel-heading
-            a href=transition_rankings_path(ranking.platform, ranking.genre.name, ranking.segment.name)
-              span=t ranking.platform, scope: 'platforms'
+            a href=transition_rankings_path(ranking.platform.name, ranking.genre.name, ranking.segment.name)
+              span= ranking.platform
               span<= ranking.genre
               span<= ranking.segment
           ul.list-group.media-list

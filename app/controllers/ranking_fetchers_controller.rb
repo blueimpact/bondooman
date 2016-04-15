@@ -12,6 +12,7 @@ class RankingFetchersController < FetchersController
   protected
 
   def fetcher_params
-    params.require(:ranking_fetcher).permit(:platform, :genre_id, :segment_id)
+    params.require(:ranking_fetcher)
+      .permit(:platform_name, :genre_id, :segment_id)
   end
 end

@@ -16,7 +16,7 @@ class Formatter < ActiveRecord::Base
   }
 
   RANKING_HANDLERS = {
-    platform: ->(ranking) { I18n.t ranking.platform, scope: 'platforms' },
+    platform: nil,
     genre: nil,
     segment: nil,
     created_on: nil,

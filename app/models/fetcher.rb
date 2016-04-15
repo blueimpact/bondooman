@@ -1,5 +1,6 @@
 class Fetcher < ActiveRecord::Base
   include StiBecome
+  include Platformable
 
   belongs_to :item_code
   belongs_to :genre

@@ -8,7 +8,8 @@ class CrawlJob < ActiveJob::Base
 
     ranking = Ranking.new(platform: platform, genre: genre, segment: segment)
     items.each_with_index do |item, i|
-      item_code = ItemCode.find_or_create_by(platform: platform, code: item.id)
+      item_code =
+        ItemCode.find_or_create_by(platform_name: platform, code: item.id)
       ranking.items.build(
         {
           item_code: item_code,

@@ -22,7 +22,7 @@ RSpec.describe Ranking, type: :model do
       attrs[:created_on] = subject.created_on - 1
       FactoryGirl.create(
         :ranking,
-        attrs.merge(platform: (ItemCode::PLATFORMS - [subject.platform]).first)
+        attrs.merge(platform: (Platform.all - [subject.platform]).first)
       )
       FactoryGirl.create(:ranking, attrs.except(:genre_id))
       FactoryGirl.create(:ranking, attrs.except(:segment_id))

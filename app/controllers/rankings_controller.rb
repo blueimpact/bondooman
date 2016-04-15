@@ -5,7 +5,7 @@ class RankingsController < ApplicationController
   # GET /rankings/latest
   def latest
     ranking_ids =
-      Ranking.group(:platform).group(:genre_id).group(:segment_id)
+      Ranking.group(:platform_name).group(:genre_id).group(:segment_id)
       .maximum(:id).values
     @rankings =
       Ranking.includes(:genre, :segment, :items).ordered.find(ranking_ids)
@@ -13,11 +13,12 @@ class RankingsController < ApplicationController
 
   # GET /rankings/:platform/:genre/:segment
   def transition
-    @platform = params[:platform]
+    @platform = Platform[params[:platform]]
     @genre = Genre.find_by(name: params[:genre])
     @segment = Segment.find_by(name: params[:segment])
     ranking_ids =
-      Ranking.where(platform: @platform, genre: @genre, segment: @segment)
+      Ranking
+      .where(platform_name: @platform.name, genre: @genre, segment: @segment)
       .order(created_on: :desc).limit(8)
       .group(:created_on).maximum(:id).values
     @rankings =

@@ -6,18 +6,18 @@ RSpec.describe ItemFetchersController, type: :controller do
   it_behaves_like FetchersController do
     let(:valid_attributes) {
       {
-        platform: ItemCode::PLATFORMS.first,
+        platform_name: Platform::NAMES.first,
         item_code_code: 'test.bondooman.new-item'
       }
     }
 
     let(:invalid_attributes) {
-      { platform: nil }
+      { platform_name: nil }
     }
 
     let(:new_attributes) {
       {
-        platform: ItemCode::PLATFORMS.last,
+        platform_name: Platform::NAMES.last,
         item_code_code: 'test.bondooman.new-item'
       }
     }

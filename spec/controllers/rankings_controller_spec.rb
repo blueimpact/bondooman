@@ -7,7 +7,7 @@ RSpec.describe RankingsController, type: :controller do
     it 'assigns latest rankings for every group as @rankings' do
       genres = FactoryGirl.create_list(:genre, 2)
       segments = FactoryGirl.create_list(:segment, 2)
-      rankings = ItemCode::PLATFORMS.product(genres, segments).map do |p, g, s|
+      rankings = Platform::NAMES.product(genres, segments).map do |p, g, s|
         FactoryGirl.create_list(
           :ranking, 2, platform: p, genre: g, segment: s
         ).last
@@ -20,7 +20,7 @@ RSpec.describe RankingsController, type: :controller do
   describe 'GET #transition' do
     it 'assigns rankings for specific group as @rankings' do
       group = {
-        platform: ItemCode::PLATFORMS.first,
+        platform: Platform.first.name,
         genre: FactoryGirl.create(:genre),
         segment: FactoryGirl.create(:segment)
       }

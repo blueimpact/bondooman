@@ -1,7 +1,6 @@
 class ItemFetcher < Fetcher
-  validates :platform, inclusion: ItemCode::PLATFORMS
   validates :item_code_id, presence: true
-  validates :platform, uniqueness: { scope: [:item_code_id] }
+  validates :platform_name, uniqueness: { scope: [:item_code_id] }
 
   delegate :code, to: :item_code, allow_nil: true, prefix: true
 
@@ -13,7 +12,7 @@ class ItemFetcher < Fetcher
 
   def item_code_code= arg
     self.item_code =
-      ItemCode.find_or_initialize_by(platform: platform, code: arg)
+      ItemCode.find_or_initialize_by(platform_name: platform_name, code: arg)
     arg
   end
 

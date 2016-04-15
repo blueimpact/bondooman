@@ -11,19 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414110336) do
+ActiveRecord::Schema.define(version: 20160415125043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "fetchers", force: :cascade do |t|
     t.string   "type"
-    t.string   "platform"
+    t.string   "platform_name"
     t.integer  "genre_id"
     t.integer  "segment_id"
     t.json     "extras"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "item_code_id"
   end
 
@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(version: 20160414110336) do
   end
 
   create_table "item_codes", force: :cascade do |t|
-    t.string   "platform"
+    t.string   "platform_name"
     t.string   "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "items", force: :cascade do |t|
@@ -74,12 +74,12 @@ ActiveRecord::Schema.define(version: 20160414110336) do
   add_index "items", ["ranking_id"], name: "index_items_on_ranking_id", using: :btree
 
   create_table "rankings", force: :cascade do |t|
-    t.string   "platform"
+    t.string   "platform_name"
     t.integer  "genre_id"
     t.integer  "segment_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.date     "created_on", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.date     "created_on",    null: false
   end
 
   add_index "rankings", ["genre_id"], name: "index_rankings_on_genre_id", using: :btree
@@ -91,6 +91,20 @@ ActiveRecord::Schema.define(version: 20160414110336) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "formatter_id"
+    t.integer  "ranking_fetcher_id"
+    t.integer  "item_fetcher_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "subscriptions", ["formatter_id"], name: "index_subscriptions_on_formatter_id", using: :btree
+  add_index "subscriptions", ["item_fetcher_id"], name: "index_subscriptions_on_item_fetcher_id", using: :btree
+  add_index "subscriptions", ["ranking_fetcher_id"], name: "index_subscriptions_on_ranking_fetcher_id", using: :btree
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "provider",   null: false
@@ -107,4 +121,8 @@ ActiveRecord::Schema.define(version: 20160414110336) do
   add_foreign_key "items", "rankings"
   add_foreign_key "rankings", "genres"
   add_foreign_key "rankings", "segments"
+  add_foreign_key "subscriptions", "fetchers", column: "item_fetcher_id"
+  add_foreign_key "subscriptions", "fetchers", column: "ranking_fetcher_id"
+  add_foreign_key "subscriptions", "formatters"
+  add_foreign_key "subscriptions", "users"
 end

@@ -1,12 +1,16 @@
 class RankingFetcher < Fetcher
-  validates :platform, inclusion: ItemCode::PLATFORMS
   validates :genre_id, presence: true
   validates :segment_id, presence: true
-  validates :platform, uniqueness: { scope: [:genre_id, :segment_id] }
+  validates :platform_name, uniqueness: { scope: [:genre_id, :segment_id] }
 
   def rankings
     Ranking
-      .where(platform: platform, genre_id: genre_id, segment_id: segment_id)
+      .where(platform_name: platform_name)
+      .where(genre_id: genre_id, segment_id: segment_id)
       .order(id: :desc)
+  end
+
+  def to_s
+    "#{platform} - #{genre} - #{segment}"
   end
 end
