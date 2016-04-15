@@ -1,5 +1,6 @@
 class Ranking < ActiveRecord::Base
   include Platformable
+  include TimeScopes
 
   belongs_to :genre
   belongs_to :segment

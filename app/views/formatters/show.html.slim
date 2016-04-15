@@ -22,5 +22,4 @@
 hr
 
 .panel.panel-default
-  - ranking = Ranking.googleplay.last
-  == @formatter.format ranking
+  == @formatter.format @preview_ranking, @preview_items

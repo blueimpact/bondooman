@@ -12,16 +12,17 @@ class Formatter < ActiveRecord::Base
 
   extend ActiveSupport::NumberHelper
 
-  def format ranking
+  def format ranking, items = []
     [
       format_ranking(ranking, :pre),
-      *format_items(ranking),
+      *format_items(items),
+      *format_items(ranking.items),
       format_ranking(ranking, :post)
     ].join
   end
 
-  def format_items ranking
-    ranking.items.map { |item| format_item item }
+  def format_items items
+    items.map { |item| format_item item }
   end
 
   def format_item item
@@ -83,7 +84,7 @@ class Formatter < ActiveRecord::Base
       ActiveSupport::NumberHelper.send "number_#{fmt[1..-1]}", val
     elsif val.respond_to? :strftime
       val.strftime fmt
-    else
+    elsif val
       fmt % val
     end
   end

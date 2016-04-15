@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415150121) do
+ActiveRecord::Schema.define(version: 20160415151739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,15 @@ ActiveRecord::Schema.define(version: 20160415150121) do
   add_index "items", ["item_code_id"], name: "index_items_on_item_code_id", using: :btree
   add_index "items", ["ranking_id"], name: "index_items_on_ranking_id", using: :btree
 
+  create_table "publications", force: :cascade do |t|
+    t.integer  "subscription_id"
+    t.text     "body",            null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "publications", ["subscription_id"], name: "index_publications_on_subscription_id", using: :btree
+
   create_table "rankings", force: :cascade do |t|
     t.string   "platform_name"
     t.integer  "genre_id"
@@ -121,6 +130,7 @@ ActiveRecord::Schema.define(version: 20160415150121) do
   add_foreign_key "fetchers", "segments"
   add_foreign_key "items", "item_codes"
   add_foreign_key "items", "rankings"
+  add_foreign_key "publications", "subscriptions"
   add_foreign_key "rankings", "genres"
   add_foreign_key "rankings", "segments"
   add_foreign_key "subscriptions", "fetchers", column: "item_fetcher_id"

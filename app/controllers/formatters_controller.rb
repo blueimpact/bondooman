@@ -9,6 +9,8 @@ class FormattersController < ApplicationController
 
   # GET /formatters/1
   def show
+    @preview_items = Item.where(rank: nil).newest(2)
+    @preview_ranking = Ranking.googleplay.newest
   end
 
   # GET /formatters/new
