@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :formatter do
+    sequence(:label) { |i| "Formatter #{i}" }
     sequence(:item_body) { |i| "Item #{i}" }
     sequence(:pre) { |i| "Pre #{i}" }
     sequence(:post) { |i| "Post #{i}" }

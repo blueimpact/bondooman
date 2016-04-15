@@ -53,6 +53,6 @@ class FormattersController < ApplicationController
   end
 
   def formatter_params
-    params.require(:formatter).permit(:item_body, :pre, :post)
+    params.require(:formatter).permit(:label, :item_body, :pre, :post)
   end
 end

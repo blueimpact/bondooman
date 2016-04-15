@@ -33,6 +33,10 @@ class Formatter < ActiveRecord::Base
     interpolate self[attr_name], ranking
   end
 
+  def to_s
+    label
+  end
+
   private
 
   def attributes_for obj

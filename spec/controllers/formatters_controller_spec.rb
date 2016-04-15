@@ -78,14 +78,17 @@ RSpec.describe FormattersController, type: :controller do
   describe 'PUT #update' do
     context 'with valid params' do
       let(:new_attributes) {
-        { item_body: 'New Item Body' }
+        {
+          label: 'New Label',
+          item_body: 'New Item Body'
+        }
       }
 
       it 'updates the requested formatter' do
         formatter = Formatter.create! valid_attributes
         put :update, { id: formatter.id, formatter: new_attributes }
         formatter.reload
-        expect(formatter.item_body).to eq 'New Item Body'
+        expect(formatter.attributes).to include new_attributes.stringify_keys
       end
 
       it 'assigns the requested formatter as @formatter' do

@@ -33,6 +33,7 @@ ja:
       formatter:
         <<: *timestamps
         id: ID
+        label: ラベル
         item_body: 各アイテム
         pre: プリ
         post: ポスト
