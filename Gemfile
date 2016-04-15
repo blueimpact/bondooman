@@ -18,6 +18,9 @@ gem 'mechanize'
 
 gem 'sidekiq'
 gem 'sidekiq-limit_fetch'
+gem 'sidekiq-failures'
+gem 'sidekiq-history'
+gem 'sidekiq-statistic'
 gem 'sinatra', require: false
 
 gem 'omniauth'
