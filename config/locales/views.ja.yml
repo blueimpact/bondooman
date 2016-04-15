@@ -31,3 +31,11 @@ ja:
   fetchers:
     item_fetcher: アイテム
     ranking_fetcher: ランキング
+  formatters:
+    show:
+      attributes: 設定
+      preview: プレビュー
+  publications:
+    show:
+      body: 本文
+      preview: プレビュー

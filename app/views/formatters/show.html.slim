@@ -1,25 +1,33 @@
-.form.form-horizontal
-  .form-group
-    label.control-label.col-md-2= Formatter.human_attribute_name(:label)
-    p.form-control-static.col-md-10= @formatter.label
-  .form-group
-    label.control-label.col-md-2= Formatter.human_attribute_name(:item_body)
-    .form-control-static.col-md-10
-      pre= @formatter.item_body
-  .form-group
-    label.control-label.col-md-2= Formatter.human_attribute_name(:pre)
-    .form-control-static.col-md-10
-      pre= @formatter.pre
-  .form-group
-    label.control-label.col-md-2= Formatter.human_attribute_name(:post)
-    .form-control-static.col-md-10
-      pre= @formatter.post
-  .form-group
-    .col-md-offset-2.col-md-6
-      = link_to t('helpers.links.edit'), [:edit, @formatter], :class => 'btn btn-default'
-      = link_to t('helpers.links.cancel'), [:formatters], class: 'btn btn-default'
-
-hr
-
-.panel.panel-default
-  == @formatter.format @preview_ranking, @preview_items
+ul.nav.nav-tabs
+  li.active
+    a href="#attributes" data-toggle="tab"
+      =t '.attributes'
+  li
+    a href="#preview" data-toggle="tab"
+      =t '.preview'
+.tab-content
+  #attributes.tab-pane.active
+    .form.form-horizontal
+      .form-group
+        label.control-label.col-md-2= Formatter.human_attribute_name(:label)
+        p.form-control-static.col-md-10= @formatter.label
+      .form-group
+        label.control-label.col-md-2= Formatter.human_attribute_name(:item_body)
+        .form-control-static.col-md-10
+          pre= @formatter.item_body
+      .form-group
+        label.control-label.col-md-2= Formatter.human_attribute_name(:pre)
+        .form-control-static.col-md-10
+          pre= @formatter.pre
+      .form-group
+        label.control-label.col-md-2= Formatter.human_attribute_name(:post)
+        .form-control-static.col-md-10
+          pre= @formatter.post
+      .form-group
+        .col-md-offset-2.col-md-6
+          = link_to t('helpers.links.edit'), [:edit, @formatter], :class => 'btn btn-default'
+          = link_to t('helpers.links.cancel'), [:formatters], class: 'btn btn-default'
+  #preview.tab-pane
+    .panel.panel-default
+      .panel-body
+        == @formatter.format @preview_ranking, @preview_items

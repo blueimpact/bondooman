@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :subscriptions
+  resources :publications, only: [:index, :show]
 
   resources :genres
   resources :segments

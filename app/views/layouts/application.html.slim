@@ -26,7 +26,7 @@ html lang="ja"
         .navbar-collapse.collapse.navbar-responsive-collapse
           - if authenticated?
             ul.nav.navbar-nav
-              - [Subscription].each do |model_class|
+              - [Publication, Subscription].each do |model_class|
                 - name = model_class.model_name
                 - active = controller_name == name.plural ? 'active' : ''
                 li class=active = link_to name.human, [name.plural]

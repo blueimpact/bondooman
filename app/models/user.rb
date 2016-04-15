@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include Ubermenschable
 
   has_many :subscriptions, dependent: :destroy
+  has_many :publications, through: :subscriptions
 
   store_accessor :raw, :email, :role, :name, :letter, :color
 

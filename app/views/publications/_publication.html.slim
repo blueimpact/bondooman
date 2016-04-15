@@ -1,0 +1,9 @@
+- subscription = publication.subscription
+tr id=dom_id(publication)
+  td
+    = link_to publication do
+      i.fa.fa-list
+  td= subscription.formatter
+  td= subscription.ranking_fetcher
+  td= subscription.item_fetcher
+  td.text-right=l publication.created_at

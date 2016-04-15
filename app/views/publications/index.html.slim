@@ -1,0 +1,8 @@
+- if @publications.present?
+  = paginate @publications
+  table.table.table-bordered.table-condensed.table-hover
+    caption= render 'layouts/paginate_info', items: @publications
+    = render @publications
+- else
+  .alert
+    p.text-muted=t 'messages.no_item', item: Publication.model_name.human

@@ -1,0 +1,15 @@
+ul.nav.nav-tabs
+  li.active
+    a href="#body" data-toggle="tab"
+      =t '.body'
+  li
+    a href="#preview" data-toggle="tab"
+      =t '.preview'
+.tab-content
+  #body.tab-pane.active
+    textarea.form-control rows="30" readonly="readonly"
+      = @publication.body
+  #preview.tab-pane
+    .panel.panel-default
+      .panel-body
+        == @publication.body
