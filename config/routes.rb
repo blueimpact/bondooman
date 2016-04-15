@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :subscriptions
+
   resources :genres
   resources :segments
   resources :item_codes, only: [:index, :show]

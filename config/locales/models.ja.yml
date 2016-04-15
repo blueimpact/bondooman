@@ -10,6 +10,7 @@ ja:
       fetcher: 取得器
       item_fetcher: アイテム取得器
       ranking_fetcher: ランキング取得器
+      subscription: 購読
     attributes:
       timestamps: &timestamps
         created_at: 作成日時
@@ -44,3 +45,6 @@ ja:
       item_fetcher:
         <<: *fetcher
         item_code_code: アプリコード
+      subscription:
+        <<: *models
+        <<: *timestamps

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include Ubermenschable
 
+  has_many :subscriptions, dependent: :destroy
+
   store_accessor :raw, :email, :role, :name, :letter, :color
 
   delegate :member?, :admin?, to: :role

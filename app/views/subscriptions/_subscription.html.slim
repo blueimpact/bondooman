@@ -1,0 +1,11 @@
+tr id=dom_id(subscription)
+  td= subscription.formatter
+  td= subscription.ranking_fetcher
+  td= subscription.item_fetcher
+  td
+    a.btn.btn-default.btn-xs href=url_for(subscription)
+      i.fa.fa-list
+    a.btn.btn-default.btn-xs href=url_for([:edit, subscription])
+      i.fa.fa-pencil
+    a.btn.btn-danger.btn-xs href=url_for(subscription) data-method="delete"
+      i.fa.fa-times

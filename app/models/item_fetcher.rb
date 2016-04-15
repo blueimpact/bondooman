@@ -16,6 +16,10 @@ class ItemFetcher < Fetcher
     arg
   end
 
+  def to_s
+    "#{platform} - #{item_code}"
+  end
+
   private
 
   def save_item_code
