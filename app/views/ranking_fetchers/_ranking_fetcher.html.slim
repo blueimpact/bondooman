@@ -4,6 +4,7 @@ tr
   td= fetcher.platform
   td= fetcher.genre
   td= fetcher.segment
+  td.text-right= fetcher.last_fetched_at ? l(fetcher.last_fetched_at) : nil
   td
     a.btn.btn-default.btn-xs href=url_for(fetcher)
       i.fa.fa-list

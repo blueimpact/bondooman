@@ -1,5 +1,7 @@
 class CrawlJob < ActiveJob::Base
-  def perform genre, segment
+  def perform fetcher
+    genre = fetcher.genre
+    segment = fetcher.segment
     item_attributes =
       %w(url title author price image_url rating rating_count download_count)
 
@@ -18,6 +20,7 @@ class CrawlJob < ActiveJob::Base
       )
     end
     ranking.save!
+    fetcher.touch :last_fetched_at
   end
 
   def platform

@@ -3,6 +3,7 @@ tr
   td=t fetcher.type.underscore, scope: 'fetchers'
   td=t fetcher.platform, scope: 'platforms'
   td colspan="2" = fetcher.item_code
+  td.text-right= fetcher.last_fetched_at ? l(fetcher.last_fetched_at) : nil
   td
     a.btn.btn-default.btn-xs href=url_for(fetcher)
       i.fa.fa-list

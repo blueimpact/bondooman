@@ -2,7 +2,8 @@ class FetchGooglePlayJob < ActiveJob::Base
   PLATFORM = :googleplay
   queue_as PLATFORM
 
-  def perform item_code
+  def perform fetcher
+    item_code = fetcher.item_code
     if (item = find_item_of_today(item_code))
       item_code.items.create!(
         item.attributes.merge(id: nil, ranking: nil, rank: nil)
@@ -15,6 +16,7 @@ class FetchGooglePlayJob < ActiveJob::Base
         item.attributes.slice(*item_attributes)
       )
     end
+    fetcher.touch :last_fetched_at
   end
 
   def find_item_of_today item_code

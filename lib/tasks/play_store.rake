@@ -6,8 +6,8 @@ namespace :play_store do
       appstore: CrawlAppStoreJob
     }
     RankingFetcher.includes(:genre, :segment).find_each do |fetcher|
-      job = jobs[fetcher.platform.to_sym]
-      job.perform_later fetcher.genre, fetcher.segment
+      job = jobs[fetcher.platform_name.to_sym]
+      job.perform_later fetcher
     end
   end
 
@@ -17,8 +17,8 @@ namespace :play_store do
       googleplay: FetchGooglePlayJob
     }
     ItemFetcher.includes(:item_code).find_each do |fetcher|
-      job = jobs[fetcher.platform.to_sym]
-      job.perform_later fetcher.item_code
+      job = jobs[fetcher.platform_name.to_sym]
+      job.perform_later fetcher
     end
   end
 end
