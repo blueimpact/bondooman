@@ -12,8 +12,6 @@ class CrawlJob < ActiveJob::Base
       ranking.items.build(
         {
           item_code: item_code,
-          genre: genre,
-          segment: segment,
           rank: i + 1
         }.merge(item.attributes.slice(*item_attributes))
       )
