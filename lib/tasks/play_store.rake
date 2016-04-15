@@ -21,4 +21,11 @@ namespace :play_store do
       job.perform_later fetcher
     end
   end
+
+  desc 'Make publications for all subscriptions'
+  task publish: :environment do
+    Subscription.find_each do |subscription|
+      PublishJob.perform_later subscription
+    end
+  end
 end
