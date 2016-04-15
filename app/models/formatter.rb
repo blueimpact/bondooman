@@ -1,27 +1,14 @@
 class Formatter < ActiveRecord::Base
   validates :item_body, presence: true
 
-  ITEM_HANDLERS = {
-    rank: nil,
-    url: nil,
-    title: nil,
-    author: nil,
-    price: nil,
-    image_url: nil,
-    rating: nil,
-    rating_count: nil,
-    download_count_min: nil,
-    download_count_max: nil,
-    last_rank: nil
-  }
+  ITEM_ATTRIBUTES = [
+    :rank, :url, :title, :author, :price, :image_url, :rating, :rating_count,
+    :download_count_min, :download_count_max, :last_rank
+  ]
 
-  RANKING_HANDLERS = {
-    platform: nil,
-    genre: nil,
-    segment: nil,
-    created_on: nil,
-    items_count: nil
-  }
+  RANKING_ATTRIBUTES = [
+    :platform, :genre, :segment, :created_on, :items_count
+  ]
 
   extend ActiveSupport::NumberHelper
 
@@ -48,18 +35,20 @@ class Formatter < ActiveRecord::Base
 
   private
 
-  def handlers_for obj
+  def attributes_for obj
     case obj
     when Item
-      ITEM_HANDLERS
+      ITEM_ATTRIBUTES
     when Ranking
-      RANKING_HANDLERS
+      RANKING_ATTRIBUTES
     end
   end
 
   def handle obj, key
     key = key.to_sym
-    (handlers_for(obj)[key] || ->(o) { o.send key }).call(obj)
+    if attributes_for(obj).include?(key)
+      obj.send key
+    end
   end
 
   def interpolate text, obj

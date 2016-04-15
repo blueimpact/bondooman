@@ -12,7 +12,7 @@ RSpec.describe Formatter, type: :model do
   let(:ranking) { FactoryGirl.create(:ranking) }
 
   describe '#format_item' do
-    Formatter::ITEM_HANDLERS.to_a.reject(&:last).map(&:first).each do |key|
+    Formatter::ITEM_ATTRIBUTES.each do |key|
       it "formats #{key}" do
         val = item.send(key).to_s
         subject.item_body = "#{key}: {{#{key}}}"
@@ -69,7 +69,7 @@ RSpec.describe Formatter, type: :model do
   end
 
   describe '#format_ranking' do
-    Formatter::RANKING_HANDLERS.to_a.reject(&:last).map(&:first).each do |key|
+    Formatter::RANKING_ATTRIBUTES.each do |key|
       it "formats #{key}" do
         val = ranking.send(key).to_s
         subject.item_body = "#{key}: {{#{key}}}"
