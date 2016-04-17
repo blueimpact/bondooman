@@ -6,15 +6,15 @@
   .form-group
     = f.label :item_body, class: 'control-label col-md-2'
     .col-md-10
-      = f.text_area :item_body, class: 'form-control', rows: 20
+      = f.text_area :item_body, class: 'form-control autosize'
   .form-group
     = f.label :pre, class: 'control-label col-md-2'
     .col-md-10
-      = f.text_area :pre, class: 'form-control'
+      = f.text_area :pre, class: 'form-control autosize'
   .form-group
     = f.label :post, class: 'control-label col-md-2'
     .col-md-10
-      = f.text_area :post, class: 'form-control'
+      = f.text_area :post, class: 'form-control autosize'
   .form-group
     .col-md-offset-2.col-md-10
       = f.submit nil, :class => 'btn btn-primary'
