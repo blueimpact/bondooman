@@ -9,6 +9,7 @@ namespace :play_store do
       job = jobs[fetcher.platform_name.to_sym]
       job.perform_later fetcher
     end
+    Rake::Task['play_store:touch'].invoke
   end
 
   desc 'Fetch registerd items'
@@ -20,6 +21,7 @@ namespace :play_store do
       job = jobs[fetcher.platform_name.to_sym]
       job.perform_later fetcher
     end
+    Rake::Task['play_store:touch'].invoke
   end
 
   desc 'Make publications for all subscriptions'
@@ -27,5 +29,13 @@ namespace :play_store do
     Subscription.find_each do |subscription|
       PublishJob.perform_later subscription
     end
+    Rake::Task['play_store:touch'].invoke
+  end
+
+  task :touch do
+    if (url = ENV['TOUCH_URL'])
+      sh 'curl', url
+    end
   end
 end
+
