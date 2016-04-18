@@ -7,7 +7,7 @@ class PublishJob < ActiveJob::Base
     item = subscription.item_fetcher.try(:items).try(:newest)
 
     subscription.publications.create!(
-      body: formatter.format(ranking, [item])
+      body: formatter.format(ranking, Array.wrap(item))
     )
   end
 end
